@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
+import ScrollProgress from "./components/ScrollProgress"
 import Hero from "./sections/Hero"
 import About from "./sections/About"
 import Skills from "./sections/Skills"
@@ -10,6 +11,7 @@ import Contact from "./sections/Contact"
 function App() {
   return (
     <div className="scroll-smooth">
+      <ScrollProgress />
       <Navbar />
       <main>
         <Hero />

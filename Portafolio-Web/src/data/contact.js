@@ -1,7 +1,7 @@
 const contact = {
-  email: "clara.lopez@ejemplo.com",
-  linkedin: "https://linkedin.com/in/claralopez",
-  github: "https://github.com/claralopez",
+  email: "cumatzsebastian123@gmail.com",
+  linkedin: null,
+  github: "https://github.com/ocumatz-2021660",
 }
 
 export default contact

@@ -1,65 +1,97 @@
 import { motion } from "framer-motion"
 import personal from "../data/personal"
 import useScrollAnimation from "../hooks/useScrollAnimation"
+import useTilt from "../hooks/useTilt"
+import NeumorphicButton from "../components/NeumorphicButton"
+import { SURFACE, RAISED } from "../styles/neumorphism"
 
 export default function Resume() {
   const [ref, isVisible] = useScrollAnimation()
+  const { ref: tiltRef, rotateX, rotateY } = useTilt()
 
   return (
     <section
       id="resume"
-      className="min-h-screen flex items-center justify-center py-20 px-4"
+      className="relative min-h-screen flex items-center justify-center py-20 px-4 overflow-hidden"
     >
+      <div
+        className="absolute -left-32 top-1/4 w-96 h-96 blur-3xl opacity-10 -z-10"
+        style={{
+          background:
+            "radial-gradient(at 50% 50%, rgb(251, 191, 36), rgb(249, 115, 22))",
+        }}
+      />
+
       <div className="w-full max-w-3xl mx-auto" ref={ref}>
         <motion.div
-          className="text-center mb-10"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+          <h2 className="font-display text-4xl md:text-5xl text-stone-100 mb-3">
             Currículum
           </h2>
-          <div className="w-20 h-1 bg-indigo-500 mx-auto rounded-full" />
+          <div className="w-20 h-1 bg-gradient-to-r from-orange-600 to-amber-500 mx-auto rounded-full" />
         </motion.div>
 
         <motion.div
+          ref={tiltRef}
+          style={{
+            rotateX,
+            rotateY,
+            transformStyle: "preserve-3d",
+          }}
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isVisible ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          whileHover={{
-            scale: 1.02,
-            boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
+          className="rounded-2xl p-8 md:p-10 space-y-6"
+          style={{
+            backgroundColor: SURFACE,
+            boxShadow: RAISED,
           }}
-          className="bg-white rounded-2xl shadow-md border border-gray-100 p-8 md:p-10 space-y-6"
         >
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900">
+          <div className="space-y-2">
+            <h3 className="font-display text-3xl text-stone-100">
               {personal.name}
             </h3>
-            <p className="text-indigo-600 font-medium">{personal.role}</p>
+            <p className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-400 font-medium">
+              {personal.role}
+            </p>
           </div>
 
-          <div className="border-t border-gray-200" />
+          <div className="border-t border-stone-700/30" />
 
           <div>
-            <h4 className="font-semibold text-gray-800 mb-2">Perfil</h4>
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <h4 className="font-semibold text-stone-200 mb-2">Perfil</h4>
+            <p className="text-stone-400 text-sm leading-relaxed">
               {personal.description}
             </p>
           </div>
 
           <div>
-            <h4 className="font-semibold text-gray-800 mb-2">Educación</h4>
-            <p className="text-gray-600 text-sm">
-              <span className="font-medium">Técnico Superior Universitario en Informática</span>
-              <br />
-              Universidad Tecnológica — 3er semestre
-            </p>
+            <h4 className="font-semibold text-stone-200 mb-3">Educación</h4>
+            <div className="flex gap-4">
+              <div
+                className="w-3 h-3 rounded-full mt-1.5 flex-shrink-0"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #ea580c, #fbbf24)",
+                }}
+              />
+              <div>
+                <p className="text-stone-100 text-sm font-medium">
+                  Técnico Superior Universitario en Informática
+                </p>
+                <p className="text-stone-500 text-xs mt-0.5">
+                  Universidad Tecnológica — 3er semestre
+                </p>
+              </div>
+            </div>
           </div>
 
           <div>
-            <h4 className="font-semibold text-gray-800 mb-2">
+            <h4 className="font-semibold text-stone-200 mb-3">
               Tecnologías clave
             </h4>
             <div className="flex flex-wrap gap-2">
@@ -67,7 +99,7 @@ export default function Resume() {
                 (tech) => (
                   <span
                     key={tech}
-                    className="bg-indigo-50 text-indigo-700 text-xs px-3 py-1 rounded-full"
+                    className="text-xs font-medium text-stone-300 px-3 py-1.5 rounded-full border border-orange-600/30 bg-orange-600/5"
                   >
                     {tech}
                   </span>
@@ -76,13 +108,10 @@ export default function Resume() {
             </div>
           </div>
 
-          <div className="border-t border-gray-200 pt-4 text-center">
-            <a
-              href="#"
-              className="inline-block bg-indigo-600 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-indigo-700 transition-colors"
-            >
+          <div className="border-t border-stone-700/30 pt-6 text-center">
+            <NeumorphicButton href="#" variant="primary">
               Descargar CV (PDF)
-            </a>
+            </NeumorphicButton>
           </div>
         </motion.div>
       </div>

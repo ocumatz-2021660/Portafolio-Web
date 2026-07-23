@@ -1,17 +1,11 @@
 import { motion } from "framer-motion"
 import contact from "../data/contact"
 import useScrollAnimation from "../hooks/useScrollAnimation"
+import useTilt from "../hooks/useTilt"
+import NeumorphicButton from "../components/NeumorphicButton"
+import { SURFACE, RAISED, GLOW } from "../styles/neumorphism"
 
 const socials = [
-  {
-    label: "LinkedIn",
-    url: contact.linkedin,
-    icon: (
-      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-      </svg>
-    ),
-  },
   {
     label: "GitHub",
     url: contact.github,
@@ -38,25 +32,47 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="min-h-screen flex items-center justify-center py-20 px-4"
+      className="relative min-h-screen flex items-center justify-center py-20 px-4 overflow-hidden"
     >
+      <div
+        className="absolute -left-32 top-1/3 w-96 h-96 blur-3xl opacity-10 -z-10"
+        style={{
+          background:
+            "radial-gradient(at 50% 50%, rgb(251, 191, 36), rgb(249, 115, 22))",
+        }}
+      />
+
       <div className="w-full max-w-2xl mx-auto text-center" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
+          className="mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+          <h2 className="font-display text-4xl md:text-5xl text-stone-100 mb-3">
             Contacto
           </h2>
-          <div className="w-20 h-1 bg-indigo-500 mx-auto rounded-full mb-6" />
-          <p className="text-gray-500 mb-10">
-            ¿Quieres contactarme? Estoy abierta a nuevas oportunidades
+          <div className="w-20 h-1 bg-gradient-to-r from-orange-600 to-amber-500 mx-auto rounded-full mb-6" />
+          <p className="text-stone-400">
+            ¿Quieres contactarme? Estoy abierto a nuevas oportunidades
           </p>
         </motion.div>
 
         <motion.div
-          className="flex justify-center gap-6"
+          className="mb-8"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          <NeumorphicButton href={`mailto:${contact.email}`} variant="primary">
+            Enviar email
+          </NeumorphicButton>
+        </motion.div>
+
+        <div className="text-stone-500 mb-8">o conéctate en</div>
+
+        <motion.div
+          className="flex justify-center gap-4"
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={{
@@ -66,27 +82,50 @@ export default function Contact() {
           }}
         >
           {socials.map((social) => (
-            <motion.a
-              key={social.label}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col items-center gap-2 p-5 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              whileHover={{ scale: 1.1, y: -5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <span className="text-gray-700">{social.icon}</span>
-              <span className="text-sm font-medium text-gray-600">
-                {social.label}
-              </span>
-            </motion.a>
+            <SocialButton key={social.label} social={social} />
           ))}
         </motion.div>
+
+        {/* LinkedIn placeholder for future addition */}
+        <div className="mt-8 text-stone-600 text-xs">
+          {/* LinkedIn will be added here when available */}
+        </div>
       </div>
     </section>
+  )
+}
+
+function SocialButton({ social }) {
+  const { ref, rotateX, rotateY } = useTilt()
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      variants={{
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 },
+      }}
+    >
+      <motion.a
+        href={social.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-14 h-14 rounded-full flex items-center justify-center text-stone-300 transition-all"
+        style={{
+          backgroundColor: SURFACE,
+          boxShadow: RAISED,
+        }}
+        whileHover={{
+          boxShadow: `${RAISED}, ${GLOW}`,
+        }}
+      >
+        {social.icon}
+      </motion.a>
+    </motion.div>
   )
 }
