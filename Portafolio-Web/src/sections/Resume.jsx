@@ -45,7 +45,7 @@ export default function Resume() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isVisible ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="rounded-2xl p-8 md:p-10 space-y-6"
+          className="rounded-2xl p-6 sm:p-8 md:p-10 space-y-6"
           style={{
             backgroundColor: SURFACE,
             boxShadow: RAISED,

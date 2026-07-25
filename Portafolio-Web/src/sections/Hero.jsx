@@ -29,12 +29,99 @@ export default function Hero() {
       id="hero"
       className="min-h-screen relative overflow-hidden pt-20"
     >
-      {/* Fondo original: resplandor cálido (se mantiene) */}
+      {/* Fondo: brasas y fuego difuminado */}
       <div
-        className="absolute inset-0 -z-10 blur-3xl opacity-15"
+        className="absolute inset-0 -z-10 blur-3xl opacity-25"
+        style={{
+          background: [
+            "radial-gradient(ellipse 70% 60% at 35% 55%, rgb(180, 30, 10), transparent 70%)",
+            "radial-gradient(ellipse 50% 45% at 50% 40%, rgb(249, 115, 22), transparent 65%)",
+            "radial-gradient(ellipse 40% 40% at 60% 60%, rgb(251, 191, 36), transparent 60%)",
+            "radial-gradient(ellipse 120% 100% at 50% 50%, transparent 40%, rgb(28, 25, 23))",
+          ].join(", "),
+        }}
+      />
+      {/* Resplandor inferior: brasas desde la base */}
+      <div
+        className="absolute inset-0 -z-10 blur-3xl opacity-20"
         style={{
           background:
-            "radial-gradient(at 30% 50%, rgb(249, 115, 22), rgb(251, 191, 36))",
+            "radial-gradient(ellipse 80% 50% at 50% 100%, rgb(200, 50, 10), rgb(120, 10, 5) 60%, transparent 85%)",
+        }}
+      />
+
+      {/* Aurora de llamas — cintas etéreas de fuego */}
+      {/* Cinta 1: barrido diagonal rojo profundo → naranja */}
+      <div
+        className="absolute -z-10 blur-3xl opacity-20"
+        style={{
+          top: "5%",
+          left: "-10%",
+          width: "75%",
+          height: "55%",
+          transform: "rotate(-12deg)",
+          background: [
+            "radial-gradient(ellipse 100% 25% at 50% 50%, rgba(220, 40, 10, 0.7), transparent 70%)",
+            "radial-gradient(ellipse 60% 15% at 40% 55%, rgba(249, 115, 22, 0.5), transparent 65%)",
+          ].join(", "),
+        }}
+      />
+      {/* Cinta 2: ondulación central naranja → ámbar */}
+      <div
+        className="absolute -z-10 blur-3xl opacity-18"
+        style={{
+          top: "15%",
+          left: "10%",
+          width: "85%",
+          height: "50%",
+          transform: "rotate(8deg)",
+          background: [
+            "radial-gradient(ellipse 90% 20% at 55% 45%, rgba(249, 115, 22, 0.6), transparent 65%)",
+            "radial-gradient(ellipse 50% 12% at 65% 50%, rgba(251, 191, 36, 0.45), transparent 60%)",
+          ].join(", "),
+        }}
+      />
+      {/* Cinta 3: cinta inferior rojo carmesí → rojo oscuro */}
+      <div
+        className="absolute -z-10 blur-3xl opacity-20"
+        style={{
+          top: "35%",
+          left: "-5%",
+          width: "70%",
+          height: "60%",
+          transform: "rotate(18deg)",
+          background: [
+            "radial-gradient(ellipse 95% 18% at 45% 60%, rgba(180, 30, 10, 0.65), transparent 60%)",
+            "radial-gradient(ellipse 40% 10% at 50% 55%, rgba(251, 146, 60, 0.4), transparent 55%)",
+          ].join(", "),
+        }}
+      />
+      {/* Cinta 4: destello tenue superior amarillo/dorado */}
+      <div
+        className="absolute -z-10 blur-3xl opacity-15"
+        style={{
+          top: "0%",
+          left: "20%",
+          width: "65%",
+          height: "40%",
+          transform: "rotate(-5deg)",
+          background:
+            "radial-gradient(ellipse 80% 14% at 50% 50%, rgba(251, 191, 36, 0.4), rgba(249, 115, 22, 0.2) 50%, transparent 75%)",
+        }}
+      />
+      {/* Cinta 5: estela lateral derecha rojo → naranja */}
+      <div
+        className="absolute -z-10 blur-3xl opacity-16"
+        style={{
+          top: "10%",
+          right: "-8%",
+          width: "50%",
+          height: "70%",
+          transform: "rotate(22deg)",
+          background: [
+            "radial-gradient(ellipse 80% 20% at 50% 40%, rgba(200, 50, 10, 0.55), transparent 65%)",
+            "radial-gradient(ellipse 45% 10% at 40% 55%, rgba(249, 115, 22, 0.35), transparent 55%)",
+          ].join(", "),
         }}
       />
 
@@ -85,7 +172,7 @@ export default function Hero() {
             Hola soy
           </span>
 
-          <h1 className="font-condensed uppercase text-amber-50 text-5xl sm:text-6xl md:text-7xl leading-[0.9] tracking-tight drop-shadow-[0_6px_24px_rgba(0,0,0,0.55)]">
+          <h1 className="font-condensed uppercase text-amber-50 text-4xl sm:text-5xl md:text-7xl leading-[0.9] tracking-tight drop-shadow-[0_6px_24px_rgba(0,0,0,0.55)]">
             {personal.name}
           </h1>
 
@@ -111,7 +198,7 @@ export default function Hero() {
         className="absolute bottom-8 left-6 md:left-10 z-30 flex flex-col gap-4"
       >
         <div className="flex items-center gap-3">
-          <span className="text-sm text-stone-400">Encuéntrame</span>
+          <span className="hidden sm:inline text-sm text-stone-400">Encuéntrame</span>
           <a
             href={contact.github}
             target="_blank"
