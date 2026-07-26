@@ -11,14 +11,6 @@ export default function Projects() {
       id="projects"
       className="relative min-h-screen flex items-center justify-center py-20 px-4 overflow-hidden"
     >
-      <div
-        className="absolute right-0 bottom-1/4 w-96 h-96 blur-3xl opacity-12 -z-10"
-        style={{
-          background:
-            "radial-gradient(at 50% 50%, rgb(249, 115, 22), rgb(217, 119, 6))",
-        }}
-      />
-
       <div className="w-full max-w-5xl mx-auto" ref={ref}>
         <motion.div
           className="text-center mb-12"

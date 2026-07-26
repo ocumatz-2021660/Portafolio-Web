@@ -4,7 +4,10 @@ import skills from "../data/skills"
 import SkillWheel from "../components/SkillWheel"
 import SkillPercentChart from "../components/SkillPercentChart"
 import useScrollAnimation from "../hooks/useScrollAnimation"
-import { RAISED } from "../styles/neumorphism"
+import TracedFrame from "../components/TracedFrame"
+import { INSET_SURFACE, SUNKEN } from "../styles/neumorphism"
+
+const RADIUS = 32
 
 export default function Skills() {
   const [ref, isVisible] = useScrollAnimation()
@@ -16,14 +19,6 @@ export default function Skills() {
       id="skills"
       className="relative min-h-screen flex items-center justify-center py-20 px-4 overflow-hidden"
     >
-      <div
-        className="absolute top-1/2 -right-32 w-96 h-96 blur-3xl opacity-12 -z-10"
-        style={{
-          background:
-            "radial-gradient(at 50% 50%, rgb(249, 115, 22), rgb(217, 119, 6))",
-        }}
-      />
-
       <div className="w-full max-w-6xl mx-auto" ref={ref}>
         <motion.div
           className="text-center mb-10"
@@ -44,12 +39,15 @@ export default function Skills() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={isVisible ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="rounded-[32px] py-10 px-4 sm:px-8 mx-auto max-w-md sm:max-w-xl lg:max-w-none border border-stone-700/50"
+          className="relative py-10 px-4 sm:px-8 mx-auto max-w-md sm:max-w-xl lg:max-w-none"
           style={{
-            backgroundColor: "#242019",
-            boxShadow: RAISED,
+            backgroundColor: INSET_SURFACE,
+            boxShadow: SUNKEN,
+            borderRadius: RADIUS,
           }}
         >
+          <TracedFrame radius={RADIUS} />
+
           {/* rueda a la izquierda, gráfico de porcentajes a la derecha */}
           <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-10 lg:gap-6 xl:gap-10">
             <div className="w-full lg:w-auto lg:flex-none">

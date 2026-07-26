@@ -2,7 +2,9 @@ import { motion } from "framer-motion"
 import personal from "../data/personal"
 import useScrollAnimation from "../hooks/useScrollAnimation"
 import SectionWrapper from "../components/SectionWrapper"
-import { SURFACE, RAISED } from "../styles/neumorphism"
+import Panel from "../components/Panel"
+import { SUNKEN_CHIP } from "../styles/neumorphism"
+import { ABOUT_FADE_IN } from "../styles/transitions"
 
 const container = {
   hidden: {},
@@ -16,19 +18,24 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 }
 
+const DIVIDER = "#332e2a"
+
 export default function About() {
   const [ref, isVisible] = useScrollAnimation()
 
   return (
-    <SectionWrapper id="about" className="relative overflow-hidden">
-      <div
-        className="absolute -top-40 right-0 w-96 h-96 blur-3xl opacity-10 -z-10"
-        style={{
-          background:
-            "radial-gradient(at 50% 50%, rgb(249, 115, 22), rgb(251, 191, 36))",
-        }}
-      />
-
+    <SectionWrapper
+      id="about"
+      className="relative overflow-hidden"
+      overlay={
+        /* arranca exactamente en el color en el que termina el Hero y se
+           disuelve: la costura entre ambas secciones deja de existir */
+        <div
+          className="absolute inset-x-0 top-0 h-[55vh] min-h-[320px] pointer-events-none"
+          style={{ background: ABOUT_FADE_IN }}
+        />
+      }
+    >
       <motion.div
         ref={ref}
         variants={container}
@@ -45,28 +52,16 @@ export default function About() {
 
         <div className="grid lg:grid-cols-3 gap-8">
           <motion.div variants={item} className="lg:col-span-2 space-y-6">
-            <div
-              className="rounded-xl p-6 space-y-3"
-              style={{
-                backgroundColor: SURFACE,
-                boxShadow: RAISED,
-              }}
-            >
+            <Panel className="p-6 space-y-3">
               <h3 className="text-lg font-semibold text-stone-100">
                 Trayectoria
               </h3>
               <p className="text-stone-400 leading-relaxed text-sm">
                 {personal.description}
               </p>
-            </div>
+            </Panel>
 
-            <div
-              className="rounded-xl p-6 space-y-3"
-              style={{
-                backgroundColor: SURFACE,
-                boxShadow: RAISED,
-              }}
-            >
+            <Panel className="p-6 space-y-3">
               <h3 className="text-lg font-semibold text-stone-100">
                 Metas y aspiraciones
               </h3>
@@ -83,15 +78,9 @@ export default function About() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </Panel>
 
-            <div
-              className="rounded-xl p-6 space-y-3"
-              style={{
-                backgroundColor: SURFACE,
-                boxShadow: RAISED,
-              }}
-            >
+            <Panel className="p-6 space-y-3">
               <h3 className="text-lg font-semibold text-stone-100 mb-3">
                 Capacidades
               </h3>
@@ -99,23 +88,18 @@ export default function About() {
                 {personal.capacidades.map((cap, i) => (
                   <span
                     key={i}
-                    className="text-xs font-medium text-stone-300 px-3 py-1.5 rounded-full border border-orange-600/30 bg-orange-600/5"
+                    className="text-xs font-medium text-amber-200/85 px-3 py-1.5 rounded-full"
+                    style={{ boxShadow: SUNKEN_CHIP }}
                   >
                     {cap}
                   </span>
                 ))}
               </div>
-            </div>
+            </Panel>
           </motion.div>
 
           <motion.div variants={item}>
-            <div
-              className="rounded-xl p-6 space-y-4 sticky top-24"
-              style={{
-                backgroundColor: SURFACE,
-                boxShadow: RAISED,
-              }}
-            >
+            <Panel className="p-6 space-y-4 sticky top-24">
               <h3 className="text-lg font-semibold text-stone-100">
                 Datos personales
               </h3>
@@ -126,21 +110,21 @@ export default function About() {
                     {personal.datosPersonales.edad}
                   </span>
                 </div>
-                <div className="border-t border-stone-700/30" />
+                <div className="h-px" style={{ backgroundColor: DIVIDER }} />
                 <div className="flex justify-between">
                   <span className="text-stone-500">Ubicación</span>
                   <span className="text-stone-200 font-medium">
                     {personal.datosPersonales.ubicacion}
                   </span>
                 </div>
-                <div className="border-t border-stone-700/30" />
+                <div className="h-px" style={{ backgroundColor: DIVIDER }} />
                 <div className="flex justify-between">
                   <span className="text-stone-500">Email</span>
                   <span className="text-stone-200 font-medium text-xs truncate ml-2">
                     {personal.datosPersonales.email}
                   </span>
                 </div>
-                <div className="border-t border-stone-700/30" />
+                <div className="h-px" style={{ backgroundColor: DIVIDER }} />
                 <div className="flex justify-between">
                   <span className="text-stone-500">Idiomas</span>
                   <span className="text-stone-200 font-medium text-xs text-right">
@@ -148,7 +132,7 @@ export default function About() {
                   </span>
                 </div>
               </div>
-            </div>
+            </Panel>
           </motion.div>
         </div>
       </motion.div>

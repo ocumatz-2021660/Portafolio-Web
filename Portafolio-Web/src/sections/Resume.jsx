@@ -3,7 +3,11 @@ import personal from "../data/personal"
 import useScrollAnimation from "../hooks/useScrollAnimation"
 import useTilt from "../hooks/useTilt"
 import NeumorphicButton from "../components/NeumorphicButton"
-import { SURFACE, RAISED } from "../styles/neumorphism"
+import TracedFrame from "../components/TracedFrame"
+import { INSET_SURFACE, SUNKEN, SUNKEN_CHIP } from "../styles/neumorphism"
+
+const DIVIDER = "#332e2a"
+const RADIUS = 22
 
 export default function Resume() {
   const [ref, isVisible] = useScrollAnimation()
@@ -14,14 +18,6 @@ export default function Resume() {
       id="resume"
       className="relative min-h-screen flex items-center justify-center py-20 px-4 overflow-hidden"
     >
-      <div
-        className="absolute -left-32 top-1/4 w-96 h-96 blur-3xl opacity-10 -z-10"
-        style={{
-          background:
-            "radial-gradient(at 50% 50%, rgb(251, 191, 36), rgb(249, 115, 22))",
-        }}
-      />
-
       <div className="w-full max-w-3xl mx-auto" ref={ref}>
         <motion.div
           className="text-center mb-12"
@@ -37,20 +33,21 @@ export default function Resume() {
 
         <motion.div
           ref={tiltRef}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="relative p-6 sm:p-8 md:p-10 space-y-6"
           style={{
             rotateX,
             rotateY,
             transformStyle: "preserve-3d",
-          }}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="rounded-2xl p-6 sm:p-8 md:p-10 space-y-6"
-          style={{
-            backgroundColor: SURFACE,
-            boxShadow: RAISED,
+            backgroundColor: INSET_SURFACE,
+            boxShadow: SUNKEN,
+            borderRadius: RADIUS,
           }}
         >
+          <TracedFrame radius={RADIUS} />
+
           <div className="space-y-2">
             <h3 className="font-display text-3xl text-stone-100">
               {personal.name}
@@ -60,7 +57,7 @@ export default function Resume() {
             </p>
           </div>
 
-          <div className="border-t border-stone-700/30" />
+          <div className="h-px" style={{ backgroundColor: DIVIDER }} />
 
           <div>
             <h4 className="font-semibold text-stone-200 mb-2">Perfil</h4>
@@ -75,8 +72,7 @@ export default function Resume() {
               <div
                 className="w-3 h-3 rounded-full mt-1.5 flex-shrink-0"
                 style={{
-                  background:
-                    "linear-gradient(135deg, #ea580c, #fbbf24)",
+                  background: "linear-gradient(135deg, #ea580c, #fbbf24)",
                 }}
               />
               <div>
@@ -99,7 +95,8 @@ export default function Resume() {
                 (tech) => (
                   <span
                     key={tech}
-                    className="text-xs font-medium text-stone-300 px-3 py-1.5 rounded-full border border-orange-600/30 bg-orange-600/5"
+                    className="text-xs font-medium text-amber-200/85 px-3 py-1.5 rounded-full"
+                    style={{ boxShadow: SUNKEN_CHIP }}
                   >
                     {tech}
                   </span>
@@ -108,7 +105,8 @@ export default function Resume() {
             </div>
           </div>
 
-          <div className="border-t border-stone-700/30 pt-6 text-center">
+          <div className="pt-6 text-center">
+            <div className="h-px mb-6" style={{ backgroundColor: DIVIDER }} />
             <NeumorphicButton href="#" variant="primary">
               Descargar CV (PDF)
             </NeumorphicButton>
