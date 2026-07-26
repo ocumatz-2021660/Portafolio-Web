@@ -20,7 +20,7 @@ export default function Skills() {
         }}
       />
 
-      <div className="w-full max-w-4xl mx-auto" ref={ref}>
+      <div className="w-full max-w-5xl mx-auto" ref={ref}>
         <motion.div
           className="text-center mb-10"
           initial={{ opacity: 0, y: 30 }}
@@ -40,20 +40,15 @@ export default function Skills() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={isVisible ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="rounded-[32px] py-10 px-4 sm:px-10 mx-auto max-w-xl"
+          className="rounded-[32px] py-10 px-4 sm:px-10 mx-auto max-w-md sm:max-w-xl lg:max-w-2xl border border-stone-700/50"
           style={{
-            backgroundColor: SURFACE,
+            backgroundColor: "#242019",
             boxShadow: RAISED,
           }}
         >
           <SkillWheel skills={skills} />
         </motion.div>
       </div>
-
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 -bottom-40 sm:-bottom-56 -translate-x-1/2 w-[420px] h-[420px] sm:w-[560px] sm:h-[560px] rounded-full opacity-[0.08] bg-gradient-to-br from-orange-600 to-amber-500"
-      />
 
       <motion.a
         href="#resume"
