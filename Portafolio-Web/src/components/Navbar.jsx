@@ -90,13 +90,55 @@ export default function Navbar() {
           })}
         </motion.div>
 
-        {/* Mobile hamburger button */}
+      </div>
+
+      {/* Móvil — botón flotante "+" abajo a la derecha con su menú desplegable */}
+      <div className="sm:hidden fixed bottom-6 right-5 z-50 flex flex-col items-end gap-3">
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: 12, scale: 0.92 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 12, scale: 0.92 }}
+              transition={{ duration: 0.2 }}
+              className="origin-bottom-right rounded-2xl p-2 min-w-44 pointer-events-auto"
+              style={{
+                backgroundColor: SURFACE,
+                boxShadow: RAISED,
+              }}
+            >
+              {LINKS.map((link) => {
+                const isActive = active === link.href.slice(1)
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={closeMenu}
+                    className="block text-sm font-medium text-right px-4 py-2.5 rounded-xl transition-all"
+                    style={{
+                      boxShadow: isActive ? PRESSED : "none",
+                      background: isActive
+                        ? "linear-gradient(90deg, #ea580c, #f97316, #fbbf24)"
+                        : "transparent",
+                      color: isActive ? "transparent" : "#a8a29e",
+                      WebkitBackgroundClip: isActive ? "text" : "unset",
+                      backgroundClip: isActive ? "text" : "unset",
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                )
+              })}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <motion.button
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4 }}
           onClick={() => setMenuOpen((o) => !o)}
-          className="sm:hidden pointer-events-auto mt-2 p-2.5 rounded-full active:scale-95 transition-transform"
+          className="pointer-events-auto w-14 h-14 rounded-full flex items-center justify-center active:scale-95 transition-transform"
           style={{
             backgroundColor: SURFACE,
             boxShadow: menuOpen ? PRESSED : RAISED,
@@ -104,72 +146,21 @@ export default function Navbar() {
           aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={menuOpen}
         >
-          <svg
-            className="w-5 h-5 text-stone-300"
+          <motion.svg
+            animate={{ rotate: menuOpen ? 135 : 0 }}
+            transition={{ duration: 0.25 }}
+            className="w-7 h-7 text-orange-400"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
-            strokeLinejoin="round"
             viewBox="0 0 24 24"
           >
-            {menuOpen ? (
-              <>
-                <line x1="6" y1="6" x2="18" y2="18" />
-                <line x1="6" y1="18" x2="18" y2="6" />
-              </>
-            ) : (
-              <>
-                <line x1="4" y1="7" x2="20" y2="7" />
-                <line x1="4" y1="12" x2="20" y2="12" />
-                <line x1="4" y1="17" x2="20" y2="17" />
-              </>
-            )}
-          </svg>
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </motion.svg>
         </motion.button>
       </div>
-
-      {/* Mobile dropdown menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="sm:hidden mx-4 mt-2 rounded-2xl p-2 pointer-events-auto"
-            style={{
-              backgroundColor: SURFACE,
-              boxShadow: RAISED,
-            }}
-          >
-            {LINKS.map((link) => {
-              const isActive = active === link.href.slice(1)
-              return (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={closeMenu}
-                  className="block text-sm font-medium px-4 py-2.5 rounded-xl transition-all"
-                  style={{
-                    boxShadow: isActive ? PRESSED : "none",
-                    background: isActive
-                      ? "linear-gradient(90deg, #ea580c, #f97316, #fbbf24)"
-                      : "transparent",
-                    color: isActive
-                      ? "transparent"
-                      : "#a8a29e",
-                    WebkitBackgroundClip: isActive ? "text" : "unset",
-                    backgroundClip: isActive ? "text" : "unset",
-                  }}
-                >
-                  {link.label}
-                </a>
-              )
-            })}
-          </motion.div>
-        )}
-      </AnimatePresence>
     </nav>
   )
 }
