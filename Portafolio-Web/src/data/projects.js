@@ -10,6 +10,12 @@ import estanciaRestaurante from "../assets/Restaurante-Estancia-Restaurante.jpeg
 import menuRestaurante from "../assets/Menu-Restaurante.jpeg"
 import ofertasRestaurante from "../assets/Ofertas-Restaurante.jpeg"
 import gerentesRestaurante from "../assets/Gerentes-Restaurante.jpeg"
+import videojuegosLaboratorio from "../assets/Videojuegos-Laboratorio.png"
+import menuLaboratorio from "../assets/Menu-Laboratorio.png"
+import biografiaLaboratorio from "../assets/Biografia-Laboratorio.png"
+import kinalDosLaboratorio from "../assets/Kinal-dos-Laboratorio.png"
+import kinaLaboratorio from "../assets/Kina-Laboratorio.png"
+import kinalTresLaboratorio from "../assets/Kinal-tres-Laboratorio.png"
 
 /* `images` alimenta el carrusel de la cara frontal de la tarjeta y `demoUrl`
    puede quedarse en null mientras el proyecto no esté publicado. */
@@ -46,7 +52,22 @@ const projects = [
       { src: gerentesRestaurante, alt: "Administración de gerentes" },
     ],
   },
-
+  {
+    title: "Laboratorio Personal",
+    description:
+      "Primer laboratorio personal, para destacar gustos personales, información y recreación personal de página Kinal.Academy.",
+    githubUrl: "https://github.com/ocumatz-2021660/Laboratorio1PaginaWeb.git",
+    demoUrl: "https://about-me-laboratorio.netlify.app/",
+    techs: ["HTML", "CSS"],
+    images: [
+      { src: videojuegosLaboratorio, alt: "Sección de videojuegos favoritos" },
+      { src: menuLaboratorio, alt: "Menú de navegación" },
+      { src: biografiaLaboratorio, alt: "Sección de biografía personal" },
+      { src: kinalDosLaboratorio, alt: "Vista de Kinal.Academy parte 2" },
+      { src: kinaLaboratorio, alt: "Vista principal de Kinal.Academy" },
+      { src: kinalTresLaboratorio, alt: "Vista de Kinal.Academy parte 3" },
+    ],
+  },
 ]
 
 export default projects
