@@ -1,11 +1,15 @@
+import { useState } from "react"
 import { motion } from "framer-motion"
 import skills from "../data/skills"
 import SkillWheel from "../components/SkillWheel"
+import SkillPercentChart from "../components/SkillPercentChart"
 import useScrollAnimation from "../hooks/useScrollAnimation"
-import { SURFACE, RAISED } from "../styles/neumorphism"
+import { RAISED } from "../styles/neumorphism"
 
 export default function Skills() {
   const [ref, isVisible] = useScrollAnimation()
+  /* la rueda y el gráfico de porcentajes comparten la selección */
+  const [activeIndex, setActiveIndex] = useState(0)
 
   return (
     <section
@@ -20,7 +24,7 @@ export default function Skills() {
         }}
       />
 
-      <div className="w-full max-w-5xl mx-auto" ref={ref}>
+      <div className="w-full max-w-6xl mx-auto" ref={ref}>
         <motion.div
           className="text-center mb-10"
           initial={{ opacity: 0, y: 30 }}
@@ -40,13 +44,35 @@ export default function Skills() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={isVisible ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="rounded-[32px] py-10 px-4 sm:px-10 mx-auto max-w-md sm:max-w-xl lg:max-w-2xl border border-stone-700/50"
+          className="rounded-[32px] py-10 px-4 sm:px-8 mx-auto max-w-md sm:max-w-xl lg:max-w-none border border-stone-700/50"
           style={{
             backgroundColor: "#242019",
             boxShadow: RAISED,
           }}
         >
-          <SkillWheel skills={skills} />
+          {/* rueda a la izquierda, gráfico de porcentajes a la derecha */}
+          <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-10 lg:gap-6 xl:gap-10">
+            <div className="w-full lg:w-auto lg:flex-none">
+              <SkillWheel
+                skills={skills}
+                activeIndex={activeIndex}
+                onSelect={setActiveIndex}
+              />
+            </div>
+
+            <div
+              className="hidden lg:block w-px self-stretch"
+              style={{ backgroundColor: "rgba(120,113,108,0.25)" }}
+            />
+
+            <div className="w-full lg:flex-1 lg:min-w-0 max-w-xl mx-auto lg:mx-0">
+              <SkillPercentChart
+                skills={skills}
+                activeIndex={activeIndex}
+                onSelect={setActiveIndex}
+              />
+            </div>
+          </div>
         </motion.div>
       </div>
 
