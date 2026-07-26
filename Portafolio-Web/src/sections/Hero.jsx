@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { motion } from "framer-motion"
 import personal from "../data/personal"
 import contact from "../data/contact"
@@ -24,104 +25,79 @@ function LinkedinIcon({ className = "w-5 h-5" }) {
 }
 
 export default function Hero() {
+  const [isHovered, setIsHovered] = useState(false)
+
+  const handleDownloadCV = () => {
+    const cvUrl = "/cv-oscar-cumatz.pdf"
+    const link = document.createElement("a")
+    link.href = cvUrl
+    link.download = "CV-Oscar-Cumatz.pdf"
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   return (
     <section
       id="hero"
       className="min-h-screen relative overflow-hidden pt-20"
     >
-      {/* Fondo: brasas y fuego difuminado */}
+      {/* Fondo base: centro rojizo oscuro → bordes superior morado-negro */}
       <div
-        className="absolute inset-0 -z-10 blur-3xl opacity-25"
+        className="absolute inset-0 -z-10"
         style={{
           background: [
-            "radial-gradient(ellipse 70% 60% at 35% 55%, rgb(180, 30, 10), transparent 70%)",
-            "radial-gradient(ellipse 50% 45% at 50% 40%, rgb(249, 115, 22), transparent 65%)",
-            "radial-gradient(ellipse 40% 40% at 60% 60%, rgb(251, 191, 36), transparent 60%)",
-            "radial-gradient(ellipse 120% 100% at 50% 50%, transparent 40%, rgb(28, 25, 23))",
+            "radial-gradient(ellipse 80% 80% at 50% 75%, #1a0400 0%, #0d0201 60%, #0d0005 100%)",
           ].join(", "),
-        }}
-      />
-      {/* Resplandor inferior: brasas desde la base */}
-      <div
-        className="absolute inset-0 -z-10 blur-3xl opacity-20"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 50% at 50% 100%, rgb(200, 50, 10), rgb(120, 10, 5) 60%, transparent 85%)",
         }}
       />
 
-      {/* Aurora de llamas — cintas etéreas de fuego */}
-      {/* Cinta 1: barrido diagonal rojo profundo → naranja */}
+      {/* Llama izquierda: rojo-naranja subiendo desde abajo a la izquierda */}
       <div
-        className="absolute -z-10 blur-3xl opacity-20"
+        className="absolute inset-0 -z-10"
         style={{
-          top: "5%",
-          left: "-10%",
-          width: "75%",
-          height: "55%",
-          transform: "rotate(-12deg)",
           background: [
-            "radial-gradient(ellipse 100% 25% at 50% 50%, rgba(220, 40, 10, 0.7), transparent 70%)",
-            "radial-gradient(ellipse 60% 15% at 40% 55%, rgba(249, 115, 22, 0.5), transparent 65%)",
+            "radial-gradient(ellipse 35% 70% at 8% 95%, rgba(192,56,10,0.8) 0%, rgba(224,64,16,0.5) 30%, rgba(255,85,0,0.2) 55%, transparent 75%)",
+            "radial-gradient(ellipse 20% 50% at 5% 100%, rgba(255,85,0,0.6) 0%, rgba(192,56,10,0.3) 40%, transparent 70%)",
           ].join(", "),
         }}
       />
-      {/* Cinta 2: ondulación central naranja → ámbar */}
+
+      {/* Llama derecha: rojo-naranja subiendo desde abajo a la derecha */}
       <div
-        className="absolute -z-10 blur-3xl opacity-18"
+        className="absolute inset-0 -z-10"
         style={{
-          top: "15%",
-          left: "10%",
-          width: "85%",
-          height: "50%",
-          transform: "rotate(8deg)",
           background: [
-            "radial-gradient(ellipse 90% 20% at 55% 45%, rgba(249, 115, 22, 0.6), transparent 65%)",
-            "radial-gradient(ellipse 50% 12% at 65% 50%, rgba(251, 191, 36, 0.45), transparent 60%)",
+            "radial-gradient(ellipse 35% 70% at 92% 95%, rgba(192,56,10,0.8) 0%, rgba(224,64,16,0.5) 30%, rgba(255,85,0,0.2) 55%, transparent 75%)",
+            "radial-gradient(ellipse 20% 50% at 95% 100%, rgba(255,85,0,0.6) 0%, rgba(192,56,10,0.3) 40%, transparent 70%)",
           ].join(", "),
         }}
       />
-      {/* Cinta 3: cinta inferior rojo carmesí → rojo oscuro */}
+
+      {/* Resplandor cálido central: naranja-ámbar suave desde atrás */}
       <div
-        className="absolute -z-10 blur-3xl opacity-20"
+        className="absolute inset-0 -z-10"
         style={{
-          top: "35%",
-          left: "-5%",
-          width: "70%",
-          height: "60%",
-          transform: "rotate(18deg)",
-          background: [
-            "radial-gradient(ellipse 95% 18% at 45% 60%, rgba(180, 30, 10, 0.65), transparent 60%)",
-            "radial-gradient(ellipse 40% 10% at 50% 55%, rgba(251, 146, 60, 0.4), transparent 55%)",
-          ].join(", "),
-        }}
-      />
-      {/* Cinta 4: destello tenue superior amarillo/dorado */}
-      <div
-        className="absolute -z-10 blur-3xl opacity-15"
-        style={{
-          top: "0%",
-          left: "20%",
-          width: "65%",
-          height: "40%",
-          transform: "rotate(-5deg)",
           background:
-            "radial-gradient(ellipse 80% 14% at 50% 50%, rgba(251, 191, 36, 0.4), rgba(249, 115, 22, 0.2) 50%, transparent 75%)",
+            "radial-gradient(ellipse 45% 50% at 50% 75%, rgba(212,96,10,0.35) 0%, rgba(192,56,10,0.12) 45%, transparent 75%)",
         }}
       />
-      {/* Cinta 5: estela lateral derecha rojo → naranja */}
+
+      {/* Oscurecimiento superior: bordes negros con tinte morado */}
       <div
-        className="absolute -z-10 blur-3xl opacity-16"
+        className="absolute inset-0 -z-10"
         style={{
-          top: "10%",
-          right: "-8%",
-          width: "50%",
-          height: "70%",
-          transform: "rotate(22deg)",
-          background: [
-            "radial-gradient(ellipse 80% 20% at 50% 40%, rgba(200, 50, 10, 0.55), transparent 65%)",
-            "radial-gradient(ellipse 45% 10% at 40% 55%, rgba(249, 115, 22, 0.35), transparent 55%)",
-          ].join(", "),
+          background:
+            "linear-gradient(to bottom, rgba(13,0,5,0.9) 0%, rgba(13,0,5,0.4) 38%, transparent 60%)",
+        }}
+      />
+
+      {/* Bruma inferior: base oscura que ancla las llamas */}
+      <div
+        className="absolute inset-0 -z-10"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(26,4,0,0.7) 0%, rgba(26,4,0,0.2) 0%, transparent 25%)",
         }}
       />
 
@@ -197,8 +173,67 @@ export default function Hero() {
         initial={false}
         className="absolute bottom-8 left-6 md:left-10 z-30 flex flex-col gap-4"
       >
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
+          <style>{`
+            .nb-notebook { width:64px; height:72px; position:relative; cursor:pointer; }
+            .nb-page3 { position:absolute; bottom:48px; left:12px; right:8px; height:16px; background:linear-gradient(135deg,#e8e2d4,#e0dace); border-radius:3px 3px 0 0; transition:bottom 0.3s ease 0.1s; }
+            .nb-page2 { position:absolute; bottom:50px; left:10px; right:6px; height:20px; background:linear-gradient(135deg,#f0ebe0,#e8e2d4); border-radius:3px 3px 0 0; box-shadow:1px -1px 4px rgba(0,0,0,0.15); transition:bottom 0.3s ease 0.05s; }
+            .nb-page { position:absolute; bottom:52px; left:8px; right:4px; height:24px; background:linear-gradient(135deg,#faf7f0,#f0ebe0); border-radius:3px 3px 0 0; transform-origin:bottom center; transform:rotateX(0deg); transition:transform 0.35s cubic-bezier(.25,.8,.25,1), bottom 0.35s ease, box-shadow 0.35s ease; box-shadow:1px -1px 6px rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:flex-end; padding-right:4px; }
+            .nb-notebook:hover .nb-page { bottom:72px; box-shadow:2px -4px 14px rgba(0,0,0,0.35); transform:rotateX(-8deg); }
+            .nb-notebook:hover .nb-page2 { bottom:64px; }
+            .nb-notebook:hover .nb-page3 { bottom:58px; }
+            .nb-body { position:absolute; bottom:0; left:4px; right:0; height:60px; background:linear-gradient(135deg,#f5f0e8,#ede8dc); border-radius:3px; box-shadow:2px 3px 10px rgba(0,0,0,0.5); }
+            .nb-spiral { position:absolute; left:0; top:4px; bottom:4px; width:8px; display:flex; flex-direction:column; justify-content:space-around; align-items:center; }
+            .nb-ring { width:7px; height:7px; border:1.5px solid #c0a060; border-radius:50%; background:#1a0200; }
+            .nb-lines { position:absolute; bottom:10px; left:14px; right:8px; display:flex; flex-direction:column; gap:5px; }
+            .nb-line { height:1.5px; background:rgba(100,80,60,0.25); border-radius:1px; }
+            .nb-line:nth-child(1){width:85%}
+            .nb-line:nth-child(2){width:70%}
+            .nb-line:nth-child(3){width:80%}
+          `}</style>
+
+          <div
+            className="nb-notebook"
+            title="Descargar CV"
+            onClick={() => {
+              const cvUrl = "/cv-oscar-cumatz.pdf"
+              const link = document.createElement("a")
+              link.href = cvUrl
+              link.download = "CV-Oscar-Cumatz.pdf"
+              document.body.appendChild(link)
+              link.click()
+              document.body.removeChild(link)
+            }}
+          >
+            <div className="nb-page3" />
+            <div className="nb-page2" />
+            <div className="nb-page">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 2v6M4.5 6L7 8.5 9.5 6" stroke="#c05008" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M2.5 10.5h9" stroke="#c05008" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            </div>
+            <div className="nb-body">
+              <div className="nb-spiral">
+                <div className="nb-ring" />
+                <div className="nb-ring" />
+                <div className="nb-ring" />
+                <div className="nb-ring" />
+                <div className="nb-ring" />
+              </div>
+              <div className="nb-lines">
+                <div className="nb-line" />
+                <div className="nb-line" />
+                <div className="nb-line" />
+              </div>
+            </div>
+          </div>
+
+          <span style={{ color: "rgba(200,170,130,0.75)", fontSize: "11px", letterSpacing: "1px", fontWeight: "600" }}>
+          </span>
+        </div>
+
         <div className="flex items-center gap-3">
-          <span className="hidden sm:inline text-sm text-stone-400">Encuéntrame</span>
           <a
             href={contact.github}
             target="_blank"
@@ -218,6 +253,7 @@ export default function Hero() {
             <LinkedinIcon />
           </a>
         </div>
+
       </motion.div>
 
       {/* Componente derecho — tarjeta Stack + barras de progreso */}
