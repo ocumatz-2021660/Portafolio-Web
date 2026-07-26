@@ -19,15 +19,13 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-display text-4xl md:text-5xl text-stone-100 mb-3">
-            Proyectos
+            Proyectos Desarrollados
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-orange-600 to-amber-500 mx-auto rounded-full" />
-          <p className="text-stone-400 mt-4">
-            Algunos de los proyectos que he desarrollado
-          </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 gap-6">
+        {/* una fila completa por proyecto */}
+        <div className="space-y-8">
           {projects.map((project, i) => (
             <ProjectCard key={project.title} project={project} index={i} />
           ))}
