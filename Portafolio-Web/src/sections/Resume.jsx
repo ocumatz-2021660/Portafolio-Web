@@ -6,6 +6,7 @@ import useScrollAnimation from "../hooks/useScrollAnimation"
 import Panel from "../components/Panel"
 import { BriefcaseIcon, CapIcon, CodeIcon } from "../components/InfoIcons"
 import { SUNKEN_CHIP } from "../styles/neumorphism"
+import downloadCV from "../utils/downloadCV"
 
 const STAT_BG = "#1b1815" // caja excavada dentro del panel, un tono más honda
 
@@ -28,13 +29,15 @@ function Stat({ value, label }) {
 /* Botón de descarga: se levanta al pasar el cursor apoyado en su propia
    sombra y se hunde al pulsar. El foco de teclado usa los mismos estados que
    el hover para que no quede invisible al tabular. */
-function DownloadCV({ href = "#" }) {
+function DownloadCV() {
   const [isHovered, setIsHovered] = useState(false)
   const [isActive, setIsActive] = useState(false)
 
   return (
     <a
-      href={href}
+      href={personal.cvUrl}
+      download={personal.cvFileName}
+      onClick={downloadCV}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => {
         setIsHovered(false)
@@ -179,7 +182,7 @@ export default function Resume() {
               </Panel>
 
               <div className="text-center pt-1">
-                <DownloadCV href="#" />
+                <DownloadCV />
               </div>
             </div>
           </div>

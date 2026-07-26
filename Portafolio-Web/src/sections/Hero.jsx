@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { motion } from "framer-motion"
 import personal from "../data/personal"
 import contact from "../data/contact"
@@ -7,6 +6,7 @@ import cumatz from "../assets/cumatz-cut.png"
 import cumatzSonrie from "../assets/CumatzSonrie.jpeg"
 import { HERO_FADE_OUT } from "../styles/transitions"
 import { SURFACE, RAISED } from "../styles/neumorphism"
+import downloadCV from "../utils/downloadCV"
 
 
 
@@ -149,18 +149,6 @@ function SocialLinks({ className = "" }) {
 }
 
 export default function Hero() {
-  const [isHovered, setIsHovered] = useState(false)
-
-  const handleDownloadCV = () => {
-    const cvUrl = "/cv-oscar-cumatz.pdf"
-    const link = document.createElement("a")
-    link.href = cvUrl
-    link.download = "CV-Oscar-Cumatz.pdf"
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
-
   return (
     <section
       id="hero"
@@ -319,18 +307,13 @@ export default function Hero() {
                 .nb-line:nth-child(3){width:80%}
               `}</style>
 
-              <div
+              <a
                 className="nb-notebook"
                 title="Descargar CV"
-                onClick={() => {
-                  const cvUrl = "/cv-oscar-cumatz.pdf"
-                  const link = document.createElement("a")
-                  link.href = cvUrl
-                  link.download = "CV-Oscar-Cumatz.pdf"
-                  document.body.appendChild(link)
-                  link.click()
-                  document.body.removeChild(link)
-                }}
+                href={personal.cvUrl}
+                download={personal.cvFileName}
+                onClick={downloadCV}
+                aria-label="Descargar currículum en PDF"
               >
                 <div className="nb-page3" />
                 <div className="nb-page2" />
@@ -354,7 +337,7 @@ export default function Hero() {
                     <div className="nb-line" />
                   </div>
                 </div>
-              </div>
+              </a>
 
               <span style={{ color: "rgba(200,170,130,0.75)", fontSize: "11px", letterSpacing: "1px", fontWeight: "600" }}>
               </span>

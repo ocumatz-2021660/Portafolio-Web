@@ -6,6 +6,10 @@ const personal = {
   role: "Desarrollador Full-Stack",
   tagline: "Transformando ideas en código, con hambre de aprendizaje en el mundo digital",
 
+  /* vive en public/, así que se sirve tal cual desde la raíz */
+  cvUrl: "/curriculum-oscar-cumatz.pdf",
+  cvFileName: "Currículum Oscar Cumatz.pdf",
+
   quienSoy:
     "Desarrollador Full Stack en formación constante, con interés en el desarrollo de aplicaciones web y la creación de interfaces llamativas. Enfocado en escribir código limpio y adaptarme a las innovaciones de la tecnología, aplicando buenas prácticas de desarrollo y fortaleciendo continuamente mis habilidades técnicas.",
 
