@@ -4,7 +4,7 @@ import useScrollAnimation from "../hooks/useScrollAnimation"
 import SectionBackground from "../components/SectionBackground"
 
 export default function Contact() {
-  const [ref, isVisible] = useScrollAnimation()
+  const [ref, isVisible] = useScrollAnimation({ repeat: true })
 
   return (
     <section
@@ -18,7 +18,7 @@ export default function Contact() {
         {/* Columna izquierda - Texto */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
-          animate={isVisible ? { opacity: 1, x: 0 } : {}}
+          animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center md:items-start text-center md:text-left"
         >
@@ -33,7 +33,7 @@ export default function Contact() {
 
           <motion.div
             initial={{ opacity: 0, y: 10 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex items-center gap-2"
           >
@@ -47,7 +47,7 @@ export default function Contact() {
         {/* Columna derecha - Iconos de redes sociales */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
-          animate={isVisible ? { opacity: 1, x: 0 } : {}}
+          animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <style>{`

@@ -46,7 +46,7 @@ function Dato({ icon, label, children }) {
 }
 
 export default function About() {
-  const [ref, isVisible] = useScrollAnimation()
+  const [ref, isVisible] = useScrollAnimation({ repeat: true })
   const datos = personal.datosPersonales
 
   return (

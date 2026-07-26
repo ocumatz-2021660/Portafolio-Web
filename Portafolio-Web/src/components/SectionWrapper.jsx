@@ -9,7 +9,7 @@ export default function SectionWrapper({
   className = "",
   overlay = null,
 }) {
-  const [ref, isVisible] = useScrollAnimation()
+  const [ref, isVisible] = useScrollAnimation({ repeat: true })
 
   return (
     <section

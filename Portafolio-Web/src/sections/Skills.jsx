@@ -11,7 +11,7 @@ import SectionBackground from "../components/SectionBackground"
 const RADIUS = 32
 
 export default function Skills() {
-  const [ref, isVisible] = useScrollAnimation()
+  const [ref, isVisible] = useScrollAnimation({ repeat: true })
   /* la rueda y el gráfico de porcentajes comparten la selección */
   const [activeIndex, setActiveIndex] = useState(0)
 
@@ -25,7 +25,7 @@ export default function Skills() {
         <motion.div
           className="text-center mb-10"
           initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-display text-4xl md:text-5xl text-stone-100 mb-3">
@@ -39,7 +39,7 @@ export default function Skills() {
 
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+          animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="relative py-10 px-4 sm:px-8 mx-auto max-w-md sm:max-w-xl lg:max-w-none border-chase"
           style={{

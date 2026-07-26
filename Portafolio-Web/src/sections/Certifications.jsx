@@ -9,7 +9,7 @@ import SectionBackground from "../components/SectionBackground"
 const THUMB_H = "h-44 sm:h-52"
 
 export default function Certifications() {
-  const [ref, isVisible] = useScrollAnimation()
+  const [ref, isVisible] = useScrollAnimation({ repeat: true })
 
   return (
     <section
@@ -22,7 +22,7 @@ export default function Certifications() {
         <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-display text-4xl md:text-5xl text-stone-100 mb-3">
@@ -37,7 +37,7 @@ export default function Certifications() {
         <motion.div
           className="grid sm:grid-cols-2 gap-8"
           initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
           {personal.certificaciones.map((cert) => (

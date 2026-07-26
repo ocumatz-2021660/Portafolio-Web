@@ -91,7 +91,7 @@ export default function ProjectCard({ project, index }) {
     <motion.article
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
+      viewport={{ once: false, amount: 0.25 }}
       transition={{ duration: 0.55, delay: index * 0.08 }}
       className="relative p-5 sm:p-6 border-chase"
       style={{

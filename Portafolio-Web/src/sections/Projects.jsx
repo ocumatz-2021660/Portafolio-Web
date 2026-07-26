@@ -5,7 +5,7 @@ import useScrollAnimation from "../hooks/useScrollAnimation"
 import SectionBackground from "../components/SectionBackground"
 
 export default function Projects() {
-  const [ref, isVisible] = useScrollAnimation()
+  const [ref, isVisible] = useScrollAnimation({ repeat: true })
 
   return (
     <section
@@ -17,7 +17,7 @@ export default function Projects() {
         <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-display text-4xl md:text-5xl text-stone-100 mb-3">
