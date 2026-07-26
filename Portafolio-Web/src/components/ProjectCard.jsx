@@ -1,6 +1,9 @@
 import { motion } from "framer-motion"
 import useTilt from "../hooks/useTilt"
-import { SURFACE, RAISED, GLOW } from "../styles/neumorphism"
+import TracedFrame from "./TracedFrame"
+import { INSET_SURFACE, SUNKEN, SUNKEN_CHIP } from "../styles/neumorphism"
+
+const RADIUS = 18
 
 export default function ProjectCard({ project, index }) {
   const { ref, rotateX, rotateY } = useTilt()
@@ -23,15 +26,15 @@ export default function ProjectCard({ project, index }) {
         href={project.githubUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="block rounded-xl p-6 group"
+        className="relative block p-6 group"
         style={{
-          backgroundColor: SURFACE,
-          boxShadow: RAISED,
-        }}
-        whileHover={{
-          boxShadow: `${RAISED}, ${GLOW}`,
+          backgroundColor: INSET_SURFACE,
+          boxShadow: SUNKEN,
+          borderRadius: RADIUS,
         }}
       >
+        <TracedFrame radius={RADIUS} />
+
         <h3 className="text-lg font-semibold text-stone-100 mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-500 group-hover:to-amber-400 transition-all">
           {project.title}
         </h3>
@@ -42,7 +45,8 @@ export default function ProjectCard({ project, index }) {
           {project.techs.map((tech) => (
             <span
               key={tech}
-              className="text-xs font-medium text-stone-300 px-2.5 py-1 rounded-full border border-orange-600/30 bg-orange-600/5"
+              className="text-xs font-medium text-amber-200/85 px-2.5 py-1 rounded-full"
+              style={{ boxShadow: SUNKEN_CHIP }}
             >
               {tech}
             </span>

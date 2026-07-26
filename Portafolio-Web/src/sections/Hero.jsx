@@ -5,6 +5,7 @@ import contact from "../data/contact"
 import NeumorphicButton from "../components/NeumorphicButton"
 import cumatz from "../assets/cumatz-cut.png"
 import cumatzSonrie from "../assets/CumatzSonrie.jpeg"
+import { HERO_FADE_OUT } from "../styles/transitions"
 
 
 
@@ -246,6 +247,13 @@ export default function Hero() {
         />
         <PortraitBlock className="mr-24" />
       </div>
+
+      {/* Transición hacia "Sobre mí": el fondo se apaga a lo largo de media
+          pantalla y aterriza en el color de costura que continúa abajo */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-[42vh] min-h-[240px] z-10 pointer-events-none"
+        style={{ background: HERO_FADE_OUT }}
+      />
 
       {/* Capa 2 — Texto (portada), centrado */}
       <div className="relative z-20 min-h-[calc(100vh-5rem)] flex flex-col items-center lg:items-start justify-center text-center lg:text-left px-4 lg:pl-40 py-14 pb-28 lg:py-0">
