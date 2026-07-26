@@ -42,10 +42,6 @@ function GmailIcon({ className = "w-5 h-5" }) {
   )
 }
 
-/* Clases base compartidas por los botones redondos de redes */
-const socialBase =
-  "w-9 h-9 rounded-full bg-stone-900/70 border border-stone-700 flex items-center justify-center transition-colors backdrop-blur-sm"
-
 /* Tarjeta Stack — se reutiliza bajo la foto (lg) y abajo a la derecha (md) */
 function StackCard({ className = "" }) {
   return (
@@ -90,41 +86,62 @@ function PortraitBlock({ className = "" }) {
 /* Redes de contacto — abajo a la izquierda en lg, centradas en pantallas pequeñas */
 function SocialLinks({ className = "" }) {
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
+    <div className={`flex flex-nowrap items-center gap-2 sm:gap-3 ${className}`}>
+
+      {/* GitHub - blanco */}
       <a
         href={contact.github}
         target="_blank"
         rel="noreferrer"
-        className={`${socialBase} text-stone-100 border-stone-500/60 hover:text-white hover:border-stone-300/80`}
+        className="shrink-0 p-3 sm:p-4 rounded-full backdrop-blur-lg border border-white/10 bg-gradient-to-tr from-black/60 to-black/40 shadow-lg hover:shadow-2xl hover:shadow-white/20 hover:scale-110 hover:rotate-3 active:scale-95 active:rotate-0 transition-all duration-300 ease-out cursor-pointer hover:border-white/30 group relative overflow-hidden"
         aria-label="GitHub"
       >
-        <GithubIcon />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+        <div className="relative z-10">
+          <GithubIcon className="w-6 h-6 sm:w-7 sm:h-7 text-white group-hover:text-white/90 transition-colors duration-300" />
+        </div>
       </a>
+
+      {/* LinkedIn - azul */}
       <a
         href={contact.linkedin || "#contact"}
         target={contact.linkedin ? "_blank" : undefined}
         rel="noreferrer"
-        className={`${socialBase} text-[#0A66C2] border-[#0A66C2]/50 hover:text-[#3d95e8] hover:border-[#3d95e8]/80`}
+        className="shrink-0 p-3 sm:p-4 rounded-full backdrop-blur-lg border border-blue-500/20 bg-gradient-to-tr from-black/60 to-black/40 shadow-lg hover:shadow-2xl hover:shadow-blue-500/30 hover:scale-110 hover:rotate-2 active:scale-95 active:rotate-0 transition-all duration-300 ease-out cursor-pointer hover:border-blue-500/50 group relative overflow-hidden"
         aria-label="LinkedIn"
       >
-        <LinkedinIcon />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+        <div className="relative z-10">
+          <LinkedinIcon className="w-6 h-6 sm:w-7 sm:h-7 text-blue-500 group-hover:text-blue-400 transition-colors duration-300" />
+        </div>
       </a>
+
+      {/* Instagram - rosa */}
       <a
         href={contact.instagram || "#contact"}
         target={contact.instagram ? "_blank" : undefined}
         rel="noreferrer"
-        className={`${socialBase} text-[#E1306C] border-[#E1306C]/50 hover:text-[#f56aa0] hover:border-[#f56aa0]/80`}
+        className="shrink-0 p-3 sm:p-4 rounded-full backdrop-blur-lg border border-pink-500/20 bg-gradient-to-tr from-black/60 to-black/40 shadow-lg hover:shadow-2xl hover:shadow-pink-500/30 hover:scale-110 hover:-rotate-2 active:scale-95 active:rotate-0 transition-all duration-300 ease-out cursor-pointer hover:border-pink-500/50 group relative overflow-hidden"
         aria-label="Instagram"
       >
-        <InstagramIcon />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-pink-400/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+        <div className="relative z-10">
+          <InstagramIcon className="w-6 h-6 sm:w-7 sm:h-7 text-pink-500 group-hover:text-pink-400 transition-colors duration-300" />
+        </div>
       </a>
+
+      {/* Gmail - rojo */}
       <a
         href={`mailto:${contact.email}`}
-        className={`${socialBase} text-[#EA4335] border-[#EA4335]/50 hover:text-[#ff6f63] hover:border-[#ff6f63]/80`}
+        className="shrink-0 p-3 sm:p-4 rounded-full backdrop-blur-lg border border-red-500/20 bg-gradient-to-tr from-black/60 to-black/40 shadow-lg hover:shadow-2xl hover:shadow-red-500/30 hover:scale-110 hover:-rotate-3 active:scale-95 active:rotate-0 transition-all duration-300 ease-out cursor-pointer hover:border-red-500/50 group relative overflow-hidden"
         aria-label="Gmail"
       >
-        <GmailIcon />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-400/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+        <div className="relative z-10">
+          <GmailIcon className="w-6 h-6 sm:w-7 sm:h-7 text-red-500 group-hover:text-red-400 transition-colors duration-300" />
+        </div>
       </a>
+
     </div>
   )
 }
@@ -316,8 +333,13 @@ export default function Hero() {
               </span>
             </div>
 
-            <NeumorphicButton href="#about" variant="primary">
-              Conóceme
+            <NeumorphicButton
+              href="#about"
+              variant="primary"
+              className="group relative overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-amber-500/30 hover:scale-105 active:scale-95 duration-300 ease-out"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+              <span className="relative z-10">Conóceme</span>
             </NeumorphicButton>
           </div>
 
