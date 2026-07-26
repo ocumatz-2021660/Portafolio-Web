@@ -10,8 +10,6 @@ import {
   LanguageIcon,
 } from "../components/InfoIcons"
 import { ABOUT_FADE_IN } from "../styles/transitions"
-/* en pausa junto con las tarjetas de Metas y Capacidades:
-import { SUNKEN_CHIP } from "../styles/neumorphism" */
 
 const container = {
   hidden: {},
@@ -110,24 +108,7 @@ export default function About() {
             </Panel>
             */}
 
-            {/* Capacidades — en pausa
-            <Panel className="p-6 space-y-3">
-              <h3 className="text-lg font-semibold text-stone-100 mb-3">
-                Capacidades
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {personal.capacidades.map((cap, i) => (
-                  <span
-                    key={i}
-                    className="text-xs font-medium text-amber-200/85 px-3 py-1.5 rounded-full"
-                    style={{ boxShadow: SUNKEN_CHIP }}
-                  >
-                    {cap}
-                  </span>
-                ))}
-              </div>
-            </Panel>
-            */}
+            {/* Capacidades se mudó a la sección Experiencia */}
           </motion.div>
 
           <motion.div variants={item}>

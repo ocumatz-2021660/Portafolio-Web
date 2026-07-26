@@ -24,8 +24,29 @@ const personal = {
     "Trabajo en equipo y colaboración",
     "Aprendizaje autodidacta continuo",
     "Comunicación técnica efectiva",
-    "Iniciativa ante los problemas",
-    "Enfoque técnico"
+  ],
+
+  experiencia: {
+    estado: "Sin experiencia formal",
+    nota: "En proceso",
+    aniosProgramando: 3,
+  },
+
+  educacion: [
+    {
+      titulo: "Educación Básica",
+      institucion: "Centro Educativo Técnico Laboral Kinal",
+      periodo: "2021 – 2023",
+      descripcion:
+        "Enfoque en la formación académica, técnica y ética humana, fundamentada en valores como la responsabilidad por medio de trabajos técnicos.",
+    },
+    {
+      titulo: "Perito en Informática",
+      institucion: "Centro Educativo Técnico Laboral Kinal",
+      periodo: "2024 – 2026 (en proceso)",
+      descripcion:
+        "Enfoque en desarrollo de software, estructuras de datos, bases de datos y arquitectura de sistemas, análisis profundo y capacidad de resolución de problemas.",
+    },
   ],
 
   datosPersonales: {

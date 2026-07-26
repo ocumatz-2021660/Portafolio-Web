@@ -80,7 +80,7 @@ export default function Skills() {
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        Currículum
+        Experiencia
         <span>↓</span>
       </motion.a>
     </section>
