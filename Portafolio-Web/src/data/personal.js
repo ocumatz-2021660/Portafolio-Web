@@ -1,3 +1,6 @@
+import certItEssentials from "../assets/cert-it-essentials.png"
+import certPowerBi from "../assets/cert-powerbi.png"
+
 const personal = {
   name: "Oscar Cumatz",
   role: "Desarrollador Full-Stack",
@@ -46,6 +49,25 @@ const personal = {
       periodo: "2024 – 2026 (en proceso)",
       descripcion:
         "Enfoque en desarrollo de software, estructuras de datos, bases de datos y arquitectura de sistemas, análisis profundo y capacidad de resolución de problemas.",
+    },
+  ],
+
+  certificaciones: [
+    {
+      titulo: "IT Essentials: PC Hardware and Software",
+      emisor: "Cisco Networking Academy",
+      fecha: "Agosto 2024",
+      descripcion:
+        "Fundamentos de hardware y software: ensamblaje y mantenimiento de equipos, instalación de sistemas operativos, redes básicas y diagnóstico de fallas.",
+      imagen: certItEssentials,
+    },
+    {
+      titulo: "Estrategias de negocios basadas en datos con Power BI",
+      emisor: "Erasmus+ ECOCredGT",
+      fecha: "Mayo 2026",
+      descripcion:
+        "Modelado, análisis y visualización de información con Power BI para convertir datos en decisiones de negocio. Impartido por Fundación Kinal.",
+      imagen: certPowerBi,
     },
   ],
 

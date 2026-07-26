@@ -107,7 +107,10 @@ export default function Resume() {
   return (
     <section
       id="resume"
-      className="relative min-h-screen flex items-center justify-center py-20 px-4 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center py-24 px-4 overflow-hidden"
+      /* si el contenido llega a ser más alto que la pantalla, el centrado
+         normal lo desborda por arriba y el título acaba bajo el menú fijo */
+      style={{ alignItems: "safe center" }}
     >
       <div className="w-full max-w-5xl mx-auto" ref={ref}>
         <motion.div

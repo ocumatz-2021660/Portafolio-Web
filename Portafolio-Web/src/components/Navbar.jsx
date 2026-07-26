@@ -8,6 +8,7 @@ const LINKS = [
   { label: "Sobre mí", href: "#about" },
   { label: "Habilidades", href: "#skills" },
   { label: "Experiencia", href: "#resume" },
+  { label: "Certificaciones", href: "#certifications" },
   { label: "Proyectos", href: "#projects" },
   { label: "Contacto", href: "#contact" },
 ]
