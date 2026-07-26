@@ -6,6 +6,7 @@ import NeumorphicButton from "../components/NeumorphicButton"
 import cumatz from "../assets/cumatz-cut.png"
 import cumatzSonrie from "../assets/CumatzSonrie.jpeg"
 import { HERO_FADE_OUT } from "../styles/transitions"
+import { SURFACE, RAISED } from "../styles/neumorphism"
 
 
 
@@ -223,6 +224,24 @@ export default function Hero() {
             "linear-gradient(to top, rgba(26,4,0,0.7) 0%, rgba(26,4,0,0.2) 0%, transparent 25%)",
         }}
       />
+
+      {/* En pantallas pequeñas la barra de navegación no se muestra y arriba
+          queda un hueco: este rótulo lo ocupa, con la misma píldora del menú */}
+      <motion.div
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="sm:hidden absolute top-15 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 px-5 py-2.5 rounded-full whitespace-nowrap"
+        style={{ backgroundColor: SURFACE, boxShadow: RAISED }}
+      >
+        <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-stone-500">
+          Portafolio
+        </span>
+        <span className="w-1 h-1 rounded-full bg-stone-600" />
+        <span className="text-sm font-semibold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-400">
+          {personal.name}
+        </span>
+      </motion.div>
 
       {/* Capa 0 — Retrato de fondo (mismo recorte, difuminado suave y centrado) */}
       <div className="absolute inset-0 z-0 flex items-end justify-center pointer-events-none">
