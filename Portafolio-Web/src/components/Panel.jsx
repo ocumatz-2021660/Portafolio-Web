@@ -12,7 +12,7 @@ export default function Panel({
 }) {
   return (
     <div
-      className={`relative ${className}`}
+      className={`relative border-chase ${className}`}
       style={{
         backgroundColor: INSET_SURFACE,
         boxShadow: SUNKEN,

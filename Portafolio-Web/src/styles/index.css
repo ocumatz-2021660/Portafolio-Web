@@ -29,3 +29,46 @@ body {
   font-weight: 400;
   letter-spacing: 0.01em;
 }
+
+/* ---- border chase animation ---- */
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes borderChase {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+.border-chase {
+  position: relative;
+}
+
+.border-chase::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--border-angle),
+    transparent 0%,
+    transparent 72%,
+    rgba(249, 115, 22, 0.85) 88%,
+    rgba(251, 191, 36, 0.6) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borderChase 4s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}

@@ -41,7 +41,7 @@ export default function Skills() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={isVisible ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="relative py-10 px-4 sm:px-8 mx-auto max-w-md sm:max-w-xl lg:max-w-none"
+          className="relative py-10 px-4 sm:px-8 mx-auto max-w-md sm:max-w-xl lg:max-w-none border-chase"
           style={{
             backgroundColor: INSET_SURFACE,
             boxShadow: SUNKEN,
