@@ -3,6 +3,9 @@ const personal = {
   role: "Desarrollador Full-Stack",
   tagline: "Transformando ideas en código, con hambre de aprendizaje en el mundo digital",
 
+  quienSoy:
+    "Desarrollador Full Stack en formación constante, con interés en el desarrollo de aplicaciones web y la creación de interfaces llamativas. Enfocado en escribir código limpio y adaptarme a las innovaciones de la tecnología, aplicando buenas prácticas de desarrollo y fortaleciendo continuamente mis habilidades técnicas.",
+
   description:
     "Apasionada por la tecnología y el desarrollo de software. Actualmente cursando el tercer semestre de la carrera de Informática, con enfoque en desarrollo web y bases de datos. Me motiva la posibilidad de aprender más habilidades y expandirme en diferentes problemas creando soluciones reales para las personas.",
 
