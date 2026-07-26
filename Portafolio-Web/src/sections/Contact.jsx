@@ -9,7 +9,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative min-h-screen flex items-center justify-center py-[4.25rem] px-4 overflow-hidden"
+      className="relative min-h-screen flex items-end justify-center pb-[20rem] pt-[10rem] px-4 overflow-hidden"
     >
       <SectionBackground position="bottom-left" color="rgba(210,90,15,0.22)" />
 
