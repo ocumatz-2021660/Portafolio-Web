@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { getSkillIcon } from "./SkillIcons"
 import { SURFACE, RAISED, PRESSED } from "../styles/neumorphism"
@@ -8,27 +7,25 @@ const RADIUS = 170 // distancia de cada nodo al centro (cabe dentro de WHEEL)
 const WHEEL_TOP = 30 // desplazamiento de la rueda dentro del viewport
 const VIEWPORT_H = 360 // alto visible: cubre el arco y el círculo de datos completo
 const INFO = 220 // diámetro del círculo de datos
-const BAR_MAX = 48 // alto en px que representa el 100 %
 const FADE_BELOW = 45 // los nodos por debajo de esta y se desvanecen en vez de recortarse
+const SIDE = 2 // cuántos nodos se ven a cada lado del activo
+const ANGLE_STEP = 50 // separación angular fija entre nodos vecinos
 
 const PANEL_BG = SURFACE
 
-export default function SkillWheel({ skills }) {
-  const [activeIndex, setActiveIndex] = useState(0)
+export default function SkillWheel({ skills, activeIndex, onSelect }) {
   const total = skills.length
-  const angleStep = 360 / total
   const active = skills[activeIndex]
 
-  const go = (dir) => setActiveIndex((i) => (i + dir + total) % total)
+  /* distancia cíclica al nodo activo: los que quedan fuera de la ventana
+     salen por un lado y vuelven a entrar por el otro */
+  const offsetFrom = (i) => {
+    const d = (i - activeIndex + total) % total
+    return d > total / 2 ? d - total : d
+  }
 
-  /* la habilidad de la izquierda y la de la derecha en la rueda, para comparar */
-  const prev = skills[(activeIndex - 1 + total) % total]
-  const next = skills[(activeIndex + 1) % total]
-  const comparison = [
-    { skill: prev, isActive: false },
-    { skill: active, isActive: true },
-    { skill: next, isActive: false },
-  ]
+  const setActiveIndex = onSelect
+  const go = (dir) => onSelect((activeIndex + dir + total) % total)
 
   return (
     <div className="flex flex-col items-center">
@@ -44,17 +41,17 @@ export default function SkillWheel({ skills }) {
             style={{ top: WHEEL_TOP, width: WHEEL, height: WHEEL }}
           >
             {skills.map((skill, i) => {
-              const diff = i - activeIndex
-              const angleRad = ((diff * angleStep - 90) * Math.PI) / 180
+              const diff = offsetFrom(i)
+              const angleRad = ((diff * ANGLE_STEP - 90) * Math.PI) / 180
               const x = RADIUS * Math.cos(angleRad)
               const y = RADIUS * Math.sin(angleRad)
               const isActive = i === activeIndex
               const outer = isActive ? 76 : 58
               const inner = Math.round(outer * 0.66)
               const iconColor = skill.dark ? "#3a3226" : "#ffffff"
-              /* los nodos que caen bajo el arco se desvanecen: así ninguno
-                 aparece cortado por el borde del viewport */
-              const hidden = y > FADE_BELOW
+              /* solo se ve la ventana alrededor del activo; el resto se
+                 desvanece fuera del arco en vez de recortarse */
+              const hidden = Math.abs(diff) > SIDE || y > FADE_BELOW
 
               return (
                 <motion.button
@@ -119,37 +116,20 @@ export default function SkillWheel({ skills }) {
                   transition={{ duration: 0.22 }}
                   className="flex flex-col items-center w-full"
                 >
-                  <p className="text-xs font-medium uppercase tracking-wide text-stone-400 text-center leading-tight">
+                  {/* la sección a la que pertenece la habilidad se conserva
+                      aunque las barras de comparación ya no estén */}
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-500 text-center leading-tight">
+                    {active.category}
+                  </p>
+                  <p className="text-sm font-medium uppercase tracking-wide text-stone-300 text-center leading-tight mt-1.5">
                     {active.name}
                   </p>
                   <p
-                    className="text-4xl font-bold leading-none mt-1"
+                    className="text-4xl font-bold leading-none mt-2"
                     style={{ color: active.color }}
                   >
                     {active.percentage}%
                   </p>
-
-                  {/* comparación con la habilidad de la izquierda y la de la
-                      derecha — solo las barras, la altura habla por sí sola */}
-                  <div
-                    className="mt-4 flex items-end justify-center gap-4"
-                    style={{ height: BAR_MAX }}
-                    aria-label={`Comparación: ${prev.name} ${prev.percentage}%, ${active.name} ${active.percentage}%, ${next.name} ${next.percentage}%`}
-                  >
-                    {comparison.map(({ skill, isActive }) => (
-                      <motion.div
-                        key={`${skill.name}-cmp`}
-                        className="w-4 rounded-t-[3px]"
-                        initial={{ height: 0 }}
-                        animate={{ height: (skill.percentage / 100) * BAR_MAX }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        style={{
-                          backgroundColor: skill.color,
-                          opacity: isActive ? 1 : 0.4,
-                        }}
-                      />
-                    ))}
-                  </div>
                 </motion.div>
               </AnimatePresence>
             </div>
