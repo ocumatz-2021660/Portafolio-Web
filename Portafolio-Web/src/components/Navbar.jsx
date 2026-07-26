@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useRef } from "react"
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion"
 import useActiveSection from "../hooks/useActiveSection"
 import { SURFACE, RAISED, PRESSED } from "../styles/neumorphism"
 
@@ -11,6 +11,56 @@ const LINKS = [
   { label: "Proyectos", href: "#projects" },
   { label: "Contacto", href: "#contact" },
 ]
+
+function MagneticLink({ link, isActive }) {
+  const ref = useRef(null)
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const springX = useSpring(x, { stiffness: 300, damping: 20 })
+  const springY = useSpring(y, { stiffness: 300, damping: 20 })
+  const scale = useSpring(1, { stiffness: 300, damping: 20 })
+
+  const handleMouseMove = (e) => {
+    const rect = ref.current?.getBoundingClientRect()
+    if (!rect) return
+    const cx = rect.left + rect.width / 2
+    const cy = rect.top + rect.height / 2
+    x.set((e.clientX - cx) * 0.25)
+    y.set((e.clientY - cy) * 0.25)
+    scale.set(1.18)
+  }
+
+  const handleMouseLeave = () => {
+    x.set(0)
+    y.set(0)
+    scale.set(1)
+  }
+
+  return (
+    <motion.a
+      ref={ref}
+      href={link.href}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        x: springX,
+        y: springY,
+        scale,
+        display: "inline-block",
+        boxShadow: isActive ? PRESSED : "none",
+        background: isActive
+          ? "linear-gradient(90deg, #ea580c, #f97316, #fbbf24)"
+          : "transparent",
+        color: isActive ? "transparent" : "#a8a29e",
+        WebkitBackgroundClip: isActive ? "text" : "unset",
+        backgroundClip: isActive ? "text" : "unset",
+      }}
+      className="text-sm font-medium px-4 py-2 rounded-full transition-colors"
+    >
+      {link.label}
+    </motion.a>
+  )
+}
 
 export default function Navbar() {
   const active = useActiveSection()
@@ -35,24 +85,7 @@ export default function Navbar() {
           {LINKS.map((link) => {
             const isActive = active === link.href.slice(1)
             return (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium px-4 py-2 rounded-full transition-all"
-                style={{
-                  boxShadow: isActive ? PRESSED : "none",
-                  background: isActive
-                    ? "linear-gradient(90deg, #ea580c, #f97316, #fbbf24)"
-                    : "transparent",
-                  color: isActive
-                    ? "transparent"
-                    : "#a8a29e",
-                  WebkitBackgroundClip: isActive ? "text" : "unset",
-                  backgroundClip: isActive ? "text" : "unset",
-                }}
-              >
-                {link.label}
-              </a>
+              <MagneticLink key={link.href} link={link} isActive={isActive} />
             )
           })}
         </motion.div>
