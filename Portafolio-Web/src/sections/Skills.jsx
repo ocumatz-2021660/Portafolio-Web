@@ -6,6 +6,7 @@ import SkillPercentChart from "../components/SkillPercentChart"
 import useScrollAnimation from "../hooks/useScrollAnimation"
 import TracedFrame from "../components/TracedFrame"
 import { INSET_SURFACE, SUNKEN } from "../styles/neumorphism"
+import SectionBackground from "../components/SectionBackground"
 
 const RADIUS = 32
 
@@ -17,8 +18,9 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="relative min-h-screen flex items-center justify-center py-20 px-4 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center py-[4.25rem] px-4 overflow-hidden"
     >
+      <SectionBackground position="center-left" color="rgba(212,96,10,0.20)" />
       <div className="w-full max-w-6xl mx-auto" ref={ref}>
         <motion.div
           className="text-center mb-10"

@@ -14,7 +14,7 @@ export default function SectionWrapper({
   return (
     <section
       id={id}
-      className={`min-h-screen flex items-center justify-center py-20 px-4 ${className}`}
+      className={`min-h-screen flex items-center justify-center py-[4.25rem] px-4 ${className}`}
     >
       {overlay}
       <motion.div

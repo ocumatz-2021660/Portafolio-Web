@@ -46,24 +46,7 @@ const projects = [
       { src: gerentesRestaurante, alt: "Administración de gerentes" },
     ],
   },
-  {
-    title: "Blog Personal",
-    description:
-      "Blog estático generado con Markdown, con búsqueda por etiquetas y modo oscuro. Desplegado en Vercel.",
-    githubUrl: "https://github.com/ocumatz-2021660/blog-personal",
-    demoUrl: null,
-    techs: ["Next.js", "MDX", "Tailwind CSS"],
-    images: [],
-  },
-  {
-    title: "E-commerce Mini",
-    description:
-      "Simulador de tienda en línea con carrito de compras, filtros por categoría y panel de administración.",
-    githubUrl: "https://github.com/ocumatz-2021660/ecommerce-mini",
-    demoUrl: null,
-    techs: ["React", "Context API", "Styled Components"],
-    images: [],
-  },
+
 ]
 
 export default projects

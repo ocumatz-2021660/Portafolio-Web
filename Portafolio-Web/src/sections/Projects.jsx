@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import projects from "../data/projects"
 import ProjectCard from "../components/ProjectCard"
 import useScrollAnimation from "../hooks/useScrollAnimation"
+import SectionBackground from "../components/SectionBackground"
 
 export default function Projects() {
   const [ref, isVisible] = useScrollAnimation()
@@ -9,8 +10,9 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative min-h-screen flex items-center justify-center py-20 px-4 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center py-[4.25rem] px-4 overflow-hidden"
     >
+      <SectionBackground position="center" color="rgba(200,65,12,0.18)" />
       <div className="w-full max-w-5xl mx-auto" ref={ref}>
         <motion.div
           className="text-center mb-12"

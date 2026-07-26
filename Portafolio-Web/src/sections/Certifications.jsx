@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import personal from "../data/personal"
 import useScrollAnimation from "../hooks/useScrollAnimation"
 import Panel from "../components/Panel"
+import SectionBackground from "../components/SectionBackground"
 
 /* alto fijo para las dos miniaturas: los diplomas tienen proporciones
    distintas y sin recorte una tarjeta quedaba mucho más alta que la otra */
@@ -13,9 +14,10 @@ export default function Certifications() {
   return (
     <section
       id="certifications"
-      className="relative min-h-screen flex items-center justify-center py-24 px-4 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center py-[5.1rem] px-4 overflow-hidden"
       style={{ alignItems: "safe center" }}
     >
+      <SectionBackground position="center" color="rgba(180,70,15,0.20)" />
       <div className="w-full max-w-4xl mx-auto" ref={ref}>
         <motion.div
           className="text-center mb-12"

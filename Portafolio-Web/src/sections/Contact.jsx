@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import contact from "../data/contact"
 import useScrollAnimation from "../hooks/useScrollAnimation"
 import NeumorphicButton from "../components/NeumorphicButton"
+import SectionBackground from "../components/SectionBackground"
 
 export default function Contact() {
   const [ref, isVisible] = useScrollAnimation()
@@ -9,15 +10,9 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative min-h-screen flex items-center justify-center py-20 px-4 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center py-[4.25rem] px-4 overflow-hidden"
     >
-      <div
-        className="absolute -left-32 top-1/3 w-96 h-96 blur-3xl opacity-10 -z-10"
-        style={{
-          background:
-            "radial-gradient(at 50% 50%, rgb(251, 191, 36), rgb(249, 115, 22))",
-        }}
-      />
+      <SectionBackground position="bottom-left" color="rgba(210,90,15,0.22)" />
 
       <div className="w-full max-w-2xl mx-auto text-center" ref={ref}>
         <motion.div

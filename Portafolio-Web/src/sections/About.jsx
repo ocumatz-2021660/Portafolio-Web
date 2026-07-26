@@ -10,6 +10,7 @@ import {
   LanguageIcon,
 } from "../components/InfoIcons"
 import { ABOUT_FADE_IN } from "../styles/transitions"
+import SectionBackground from "../components/SectionBackground"
 
 const container = {
   hidden: {},
@@ -61,6 +62,7 @@ export default function About() {
         />
       }
     >
+      <SectionBackground position="top-right" color="rgba(180,60,10,0.22)" />
       <motion.div
         ref={ref}
         variants={container}
