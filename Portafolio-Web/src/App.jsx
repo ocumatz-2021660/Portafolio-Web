@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import ScrollProgress from "./components/ScrollProgress"
+import PixelIntro from "./components/PixelIntro"
 import Hero from "./sections/Hero"
 import About from "./sections/About"
 import Skills from "./sections/Skills"
@@ -11,6 +12,7 @@ import Contact from "./sections/Contact"
 function App() {
   return (
     <div className="scroll-smooth">
+      <PixelIntro />
       <ScrollProgress />
       <Navbar />
       <main>
