@@ -24,6 +24,111 @@ function LinkedinIcon({ className = "w-5 h-5" }) {
   )
 }
 
+function InstagramIcon({ className = "w-5 h-5" }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className} aria-hidden="true">
+      <rect x="2" y="2" width="20" height="20" rx="5.5" />
+      <circle cx="12" cy="12" r="4.2" />
+      <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+function GmailIcon({ className = "w-5 h-5" }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457Z" />
+    </svg>
+  )
+}
+
+/* Clases base compartidas por los botones redondos de redes */
+const socialBase =
+  "w-9 h-9 rounded-full bg-stone-900/70 border border-stone-700 flex items-center justify-center transition-colors backdrop-blur-sm"
+
+/* Tarjeta Stack — se reutiliza bajo la foto (lg) y abajo a la derecha (md) */
+function StackCard({ className = "" }) {
+  return (
+    <div
+      className={`flex items-center gap-3 px-4 py-3 rounded-2xl bg-stone-900/70 border border-stone-700/80 backdrop-blur-md shadow-xl ${className}`}
+    >
+      <span className="w-9 h-9 shrink-0 rounded-full bg-gradient-to-br from-orange-600 to-amber-500 flex items-center justify-center text-stone-950">
+        <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round">
+          <path d="M12 3 3 7.5 12 12l9-4.5L12 3Z" />
+          <path d="m3 12 9 4.5L21 12" />
+          <path d="m3 16.5 9 4.5 9-4.5" />
+        </svg>
+      </span>
+      <div className="leading-tight text-left">
+        <p className="text-[11px] uppercase tracking-wide text-stone-400">Stack</p>
+        <p className="text-sm font-semibold text-stone-100">Full Stack Developer</p>
+      </div>
+    </div>
+  )
+}
+
+/* Retrato enmarcado + tarjeta Stack — a la derecha en lg, en flujo debajo del texto en pantallas pequeñas */
+function PortraitBlock({ className = "" }) {
+  return (
+    <div className={`relative ${className}`}>
+      <div className="rounded-2xl border-2 border-stone-600/50 bg-stone-800/80 p-[3px] shadow-[inset_0_1px_0_rgba(168,162,158,0.15),0_8px_32px_rgba(0,0,0,0.6)]">
+        <div className="rounded-2xl bg-stone-950 overflow-hidden">
+          <img
+            src={cumatzSonrie}
+            alt="Oscar Cumatz"
+            className="rounded-2xl w-56 h-[19rem] sm:w-72 sm:h-[24rem] lg:w-80 lg:h-[26rem] object-cover object-top select-none"
+          />
+        </div>
+      </div>
+
+      {/* Tarjeta Stack pegada debajo de la foto */}
+      <StackCard className="mt-4" />
+    </div>
+  )
+}
+
+/* Redes de contacto — abajo a la izquierda en lg, centradas en pantallas pequeñas */
+function SocialLinks({ className = "" }) {
+  return (
+    <div className={`flex items-center gap-3 ${className}`}>
+      <a
+        href={contact.github}
+        target="_blank"
+        rel="noreferrer"
+        className={`${socialBase} text-stone-100 border-stone-500/60 hover:text-white hover:border-stone-300/80`}
+        aria-label="GitHub"
+      >
+        <GithubIcon />
+      </a>
+      <a
+        href={contact.linkedin || "#contact"}
+        target={contact.linkedin ? "_blank" : undefined}
+        rel="noreferrer"
+        className={`${socialBase} text-[#0A66C2] border-[#0A66C2]/50 hover:text-[#3d95e8] hover:border-[#3d95e8]/80`}
+        aria-label="LinkedIn"
+      >
+        <LinkedinIcon />
+      </a>
+      <a
+        href={contact.instagram || "#contact"}
+        target={contact.instagram ? "_blank" : undefined}
+        rel="noreferrer"
+        className={`${socialBase} text-[#E1306C] border-[#E1306C]/50 hover:text-[#f56aa0] hover:border-[#f56aa0]/80`}
+        aria-label="Instagram"
+      >
+        <InstagramIcon />
+      </a>
+      <a
+        href={`mailto:${contact.email}`}
+        className={`${socialBase} text-[#EA4335] border-[#EA4335]/50 hover:text-[#ff6f63] hover:border-[#ff6f63]/80`}
+        aria-label="Gmail"
+      >
+        <GmailIcon />
+      </a>
+    </div>
+  )
+}
+
 export default function Hero() {
   const [isHovered, setIsHovered] = useState(false)
 
@@ -113,7 +218,7 @@ export default function Hero() {
       </div>
 
       {/* Capa 1 — Retrato frontal, nítido, a la derecha junto al texto */}
-      <div className="hidden lg:flex absolute inset-y-0 right-0 z-10 items-center justify-end pointer-events-none">
+      <div className="hidden lg:flex absolute top-20 bottom-0 right-0 z-10 items-center justify-end pointer-events-none">
         {/* Halo cálido de luz detrás del retrato */}
         <div
           className="absolute bottom-0 right-0 w-[46vw] h-[85vh]"
@@ -122,29 +227,19 @@ export default function Hero() {
               "radial-gradient(ellipse 55% 60% at 62% 45%, rgba(251,146,60,0.35), rgba(234,88,12,0.12) 55%, transparent 75%)",
           }}
         />
-        <div className="relative mr-35">
-          <div className="rounded-2xl border-2 border-stone-600/50 bg-stone-800/80 p-[3px] shadow-[inset_0_1px_0_rgba(168,162,158,0.15),0_8px_32px_rgba(0,0,0,0.6)]">
-            <div className="rounded-2xl bg-stone-950 overflow-hidden">
-              <img
-                src={cumatzSonrie}
-                alt="Oscar Cumatz"
-                className="rounded-2xl w-64 h-80 object-cover object-top select-none"
-              />
-            </div>
-          </div>
-        </div>
+        <PortraitBlock className="mr-24" />
       </div>
 
       {/* Capa 2 — Texto (portada), centrado */}
-      <div className="relative z-20 min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center text-center px-4">
+      <div className="relative z-20 min-h-[calc(100vh-5rem)] flex flex-col items-center lg:items-start justify-center text-center lg:text-left px-4 lg:pl-40 py-14 pb-28 lg:py-0">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="flex flex-col items-center"
+          className="flex flex-col items-center lg:items-start"
           style={{ textShadow: "0 4px 22px rgba(0,0,0,0.7)" }}
         >
-          <span className="font-script text-4xl md:text-4xl text-amber-100 leading-none -mb-1 md:-mb-1">
+          <span className="font-script text-3xl sm:text-4xl text-amber-100 leading-none mb-2 md:mb-3">
             Hola soy
           </span>
 
@@ -156,125 +251,91 @@ export default function Hero() {
             {personal.role}
           </p>
 
-          <p className="mt-3 max-w-md text-sm md:text-base text-stone-300/90 leading-relaxed">
+          <p className="mt-3 max-w-sm text-sm md:text-base text-stone-300/90 leading-relaxed">
             {personal.tagline}
           </p>
 
-          <div className="pt-6">
+          <div className="mt-14 md:mt-16 w-full flex items-center gap-6 sm:gap-8 justify-center lg:justify-start">
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
+              <style>{`
+                .nb-notebook { width:64px; height:72px; position:relative; cursor:pointer; }
+                .nb-page3 { position:absolute; bottom:48px; left:12px; right:8px; height:16px; background:linear-gradient(135deg,#e8e2d4,#e0dace); border-radius:3px 3px 0 0; transition:bottom 0.3s ease 0.1s; }
+                .nb-page2 { position:absolute; bottom:50px; left:10px; right:6px; height:20px; background:linear-gradient(135deg,#f0ebe0,#e8e2d4); border-radius:3px 3px 0 0; box-shadow:1px -1px 4px rgba(0,0,0,0.15); transition:bottom 0.3s ease 0.05s; }
+                .nb-page { position:absolute; bottom:52px; left:8px; right:4px; height:24px; background:linear-gradient(135deg,#faf7f0,#f0ebe0); border-radius:3px 3px 0 0; transform-origin:bottom center; transform:rotateX(0deg); transition:transform 0.35s cubic-bezier(.25,.8,.25,1), bottom 0.35s ease, box-shadow 0.35s ease; box-shadow:1px -1px 6px rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:flex-end; padding-right:4px; }
+                .nb-notebook:hover .nb-page { bottom:72px; box-shadow:2px -4px 14px rgba(0,0,0,0.35); transform:rotateX(-8deg); }
+                .nb-notebook:hover .nb-page2 { bottom:64px; }
+                .nb-notebook:hover .nb-page3 { bottom:58px; }
+                .nb-body { position:absolute; bottom:0; left:4px; right:0; height:60px; background:linear-gradient(135deg,#f5f0e8,#ede8dc); border-radius:3px; box-shadow:2px 3px 10px rgba(0,0,0,0.5); }
+                .nb-spiral { position:absolute; left:0; top:4px; bottom:4px; width:8px; display:flex; flex-direction:column; justify-content:space-around; align-items:center; }
+                .nb-ring { width:7px; height:7px; border:1.5px solid #c0a060; border-radius:50%; background:#1a0200; }
+                .nb-lines { position:absolute; bottom:10px; left:14px; right:8px; display:flex; flex-direction:column; gap:5px; }
+                .nb-line { height:1.5px; background:rgba(100,80,60,0.25); border-radius:1px; }
+                .nb-line:nth-child(1){width:85%}
+                .nb-line:nth-child(2){width:70%}
+                .nb-line:nth-child(3){width:80%}
+              `}</style>
+
+              <div
+                className="nb-notebook"
+                title="Descargar CV"
+                onClick={() => {
+                  const cvUrl = "/cv-oscar-cumatz.pdf"
+                  const link = document.createElement("a")
+                  link.href = cvUrl
+                  link.download = "CV-Oscar-Cumatz.pdf"
+                  document.body.appendChild(link)
+                  link.click()
+                  document.body.removeChild(link)
+                }}
+              >
+                <div className="nb-page3" />
+                <div className="nb-page2" />
+                <div className="nb-page">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 2v6M4.5 6L7 8.5 9.5 6" stroke="#c05008" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M2.5 10.5h9" stroke="#c05008" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                </div>
+                <div className="nb-body">
+                  <div className="nb-spiral">
+                    <div className="nb-ring" />
+                    <div className="nb-ring" />
+                    <div className="nb-ring" />
+                    <div className="nb-ring" />
+                    <div className="nb-ring" />
+                  </div>
+                  <div className="nb-lines">
+                    <div className="nb-line" />
+                    <div className="nb-line" />
+                    <div className="nb-line" />
+                  </div>
+                </div>
+              </div>
+
+              <span style={{ color: "rgba(200,170,130,0.75)", fontSize: "11px", letterSpacing: "1px", fontWeight: "600" }}>
+              </span>
+            </div>
+
             <NeumorphicButton href="#about" variant="primary">
               Conóceme
             </NeumorphicButton>
           </div>
+
         </motion.div>
+
+        {/* Pantallas pequeñas: el retrato y las redes pasan al flujo, debajo del texto */}
+        <div className="lg:hidden mt-14 flex flex-col items-center gap-8 self-center">
+          <PortraitBlock />
+          <SocialLinks />
+        </div>
       </div>
 
-      {/* Componente izquierdo — Encuéntrame + redes + stack de tecnologías */}
+      {/* Redes de contacto — ancladas abajo a la izquierda solo en lg */}
       <motion.div
         initial={false}
-        className="absolute bottom-8 left-6 md:left-10 z-30 flex flex-col gap-4"
+        className="hidden lg:flex absolute bottom-8 lg:left-40 z-30 flex-col gap-4"
       >
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
-          <style>{`
-            .nb-notebook { width:64px; height:72px; position:relative; cursor:pointer; }
-            .nb-page3 { position:absolute; bottom:48px; left:12px; right:8px; height:16px; background:linear-gradient(135deg,#e8e2d4,#e0dace); border-radius:3px 3px 0 0; transition:bottom 0.3s ease 0.1s; }
-            .nb-page2 { position:absolute; bottom:50px; left:10px; right:6px; height:20px; background:linear-gradient(135deg,#f0ebe0,#e8e2d4); border-radius:3px 3px 0 0; box-shadow:1px -1px 4px rgba(0,0,0,0.15); transition:bottom 0.3s ease 0.05s; }
-            .nb-page { position:absolute; bottom:52px; left:8px; right:4px; height:24px; background:linear-gradient(135deg,#faf7f0,#f0ebe0); border-radius:3px 3px 0 0; transform-origin:bottom center; transform:rotateX(0deg); transition:transform 0.35s cubic-bezier(.25,.8,.25,1), bottom 0.35s ease, box-shadow 0.35s ease; box-shadow:1px -1px 6px rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:flex-end; padding-right:4px; }
-            .nb-notebook:hover .nb-page { bottom:72px; box-shadow:2px -4px 14px rgba(0,0,0,0.35); transform:rotateX(-8deg); }
-            .nb-notebook:hover .nb-page2 { bottom:64px; }
-            .nb-notebook:hover .nb-page3 { bottom:58px; }
-            .nb-body { position:absolute; bottom:0; left:4px; right:0; height:60px; background:linear-gradient(135deg,#f5f0e8,#ede8dc); border-radius:3px; box-shadow:2px 3px 10px rgba(0,0,0,0.5); }
-            .nb-spiral { position:absolute; left:0; top:4px; bottom:4px; width:8px; display:flex; flex-direction:column; justify-content:space-around; align-items:center; }
-            .nb-ring { width:7px; height:7px; border:1.5px solid #c0a060; border-radius:50%; background:#1a0200; }
-            .nb-lines { position:absolute; bottom:10px; left:14px; right:8px; display:flex; flex-direction:column; gap:5px; }
-            .nb-line { height:1.5px; background:rgba(100,80,60,0.25); border-radius:1px; }
-            .nb-line:nth-child(1){width:85%}
-            .nb-line:nth-child(2){width:70%}
-            .nb-line:nth-child(3){width:80%}
-          `}</style>
-
-          <div
-            className="nb-notebook"
-            title="Descargar CV"
-            onClick={() => {
-              const cvUrl = "/cv-oscar-cumatz.pdf"
-              const link = document.createElement("a")
-              link.href = cvUrl
-              link.download = "CV-Oscar-Cumatz.pdf"
-              document.body.appendChild(link)
-              link.click()
-              document.body.removeChild(link)
-            }}
-          >
-            <div className="nb-page3" />
-            <div className="nb-page2" />
-            <div className="nb-page">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 2v6M4.5 6L7 8.5 9.5 6" stroke="#c05008" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M2.5 10.5h9" stroke="#c05008" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
-            </div>
-            <div className="nb-body">
-              <div className="nb-spiral">
-                <div className="nb-ring" />
-                <div className="nb-ring" />
-                <div className="nb-ring" />
-                <div className="nb-ring" />
-                <div className="nb-ring" />
-              </div>
-              <div className="nb-lines">
-                <div className="nb-line" />
-                <div className="nb-line" />
-                <div className="nb-line" />
-              </div>
-            </div>
-          </div>
-
-          <span style={{ color: "rgba(200,170,130,0.75)", fontSize: "11px", letterSpacing: "1px", fontWeight: "600" }}>
-          </span>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <a
-            href={contact.github}
-            target="_blank"
-            rel="noreferrer"
-            className="w-9 h-9 rounded-full bg-stone-900/70 border border-stone-700 flex items-center justify-center text-stone-300 hover:text-orange-400 hover:border-orange-600/50 transition-colors backdrop-blur-sm"
-            aria-label="GitHub"
-          >
-            <GithubIcon />
-          </a>
-          <a
-            href={contact.linkedin || "#contact"}
-            target={contact.linkedin ? "_blank" : undefined}
-            rel="noreferrer"
-            className="w-9 h-9 rounded-full bg-stone-900/70 border border-stone-700 flex items-center justify-center text-stone-300 hover:text-orange-400 hover:border-orange-600/50 transition-colors backdrop-blur-sm"
-            aria-label="LinkedIn"
-          >
-            <LinkedinIcon />
-          </a>
-        </div>
-
-      </motion.div>
-
-      {/* Componente derecho — tarjeta Stack + barras de progreso */}
-      <motion.div
-        initial={false}
-        className="hidden md:flex absolute bottom-8 right-6 md:right-10 z-30 flex-col gap-3 w-72"
-      >
-        <div className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-stone-900/70 border border-stone-700/80 backdrop-blur-md shadow-xl">
-          <span className="w-9 h-9 rounded-full bg-gradient-to-br from-orange-600 to-amber-500 flex items-center justify-center text-stone-950">
-            <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round">
-              <path d="M12 3 3 7.5 12 12l9-4.5L12 3Z" />
-              <path d="m3 12 9 4.5L21 12" />
-              <path d="m3 16.5 9 4.5 9-4.5" />
-            </svg>
-          </span>
-          <div className="leading-tight">
-            <p className="text-[11px] uppercase tracking-wide text-stone-400">Stack</p>
-            <p className="text-sm font-semibold text-stone-100">Full Stack Developer</p>
-          </div>
-        </div>
-
+        <SocialLinks />
       </motion.div>
 
       {/* Indicador de scroll */}
