@@ -1,0 +1,9 @@
+[build]
+  # la app vive en una subcarpeta del repo
+  base = "Portafolio-Web"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Vite 8 exige Node >= 20.19
+  NODE_VERSION = "22"
